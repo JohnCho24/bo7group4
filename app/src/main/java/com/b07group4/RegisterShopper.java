@@ -1,5 +1,7 @@
 package com.b07group4;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -20,46 +22,47 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class LoginShopper extends AppCompatActivity {
+public class RegisterShopper extends AppCompatActivity {
 
     TextInputEditText editTextUsernameShopper, editTextPasswordShopper;
-    Button buttonLogin;
+    Button buttonReg;
     FirebaseAuth mAuth;
     ProgressBar progressBar;
     TextView textView;
+
 
     @Override
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
+        if(currentUser != null) {
             Intent intent = new Intent(getApplicationContext(), HomePage.class);
             startActivity(intent);
             finish();
         }
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login_shopper);
-
+        setContentView(R.layout.activity_register_shopper);
         mAuth = FirebaseAuth.getInstance();
         editTextUsernameShopper = findViewById(R.id.UsernameShopper);
         editTextPasswordShopper = findViewById(R.id.PasswordShopper);
-        buttonLogin = findViewById(R.id.LoginShopperButton);
+        buttonReg = findViewById(R.id.RegisterShopperButton);
         progressBar = findViewById(R.id.progressBar);
-        textView = findViewById((R.id.registerNow));
+        textView = findViewById((R.id.loginNow));
         textView.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), RegisterShopper.class);
+                Intent intent = new Intent(getApplicationContext(), LoginShopper.class);
                 startActivity(intent);
                 finish();
             }
         }));
 
-        buttonLogin.setOnClickListener(new View.OnClickListener() {
+        buttonReg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 progressBar.setVisibility((View.VISIBLE));
@@ -68,26 +71,28 @@ public class LoginShopper extends AppCompatActivity {
                 password = String.valueOf(editTextPasswordShopper.getText());
 
                 if(TextUtils.isEmpty(username)) {
-                    Toast.makeText(LoginShopper.this, "Enter username", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterShopper.this, "Enter username", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if(TextUtils.isEmpty(password)) {
-                    Toast.makeText(LoginShopper.this, "Enter password", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterShopper.this, "Enter password", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                mAuth.signInWithEmailAndPassword(username, password)
+                mAuth.createUserWithEmailAndPassword(username, password)
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
-                                progressBar.setVisibility(View.GONE);
+                                progressBar.setVisibility((View.GONE));
                                 if (task.isSuccessful()) {
-                                    Toast.makeText(getApplicationContext(), "Login Successful", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(getApplicationContext(), HomePage.class);
+                                    Toast.makeText(RegisterShopper.this, "Account created.",
+                                            Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(getApplicationContext(), LoginShopper.class);
                                     startActivity(intent);
                                     finish();
                                 } else {
-                                    Toast.makeText(LoginShopper.this, "Authentication failed.",
+                                    // If sign in fails, display a message to the user.
+                                    Toast.makeText(RegisterShopper.this, "Authentication failed.",
                                             Toast.LENGTH_SHORT).show();
                                 }
                             }
@@ -95,10 +100,4 @@ public class LoginShopper extends AppCompatActivity {
             }
         });
     }
-
-    public void clickHome(View view){
-        Intent intent = new Intent(this, HomePage.class);
-        startActivity(intent);
-    }
-
 }
