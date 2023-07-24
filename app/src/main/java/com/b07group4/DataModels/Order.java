@@ -1,18 +1,20 @@
-package com.b07group4;
+package com.b07group4.DataModels;
 
-import java.util.Map;
+import com.b07group4.DataModels.Item;
+
+import java.util.List;
 
 public class Order {
     private String orderId;
     private String shopperId;
     private String status;
     private double totalAmount;
-    private Map<String, Item> items;
+    private List<Item> items;
     public Order() {
 
     }
 
-    public Order(String orderId, String shopperId, String status, double totalAmount, Map<String, Item> items) {
+    public Order(String orderId, String shopperId, String status, double totalAmount, List<Item> items) {
         this.orderId = orderId;
         this.shopperId = shopperId;
         this.status = status;
@@ -52,11 +54,11 @@ public class Order {
         this.totalAmount = totalAmount;
     }
 
-    public Map<String, Item> getItems() {
+    public List<Item> getItems() {
         return items;
     }
 
-    public void setItems(Map<String, Item> items) {
+    public void setItems(List<Item> items) {
         this.items = items;
     }
 }

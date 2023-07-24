@@ -1,6 +1,6 @@
-package com.b07group4;
+package com.b07group4.DataModels;
 
-public class Owner extends Users{
+public class Owner extends Users {
     private String storeId;
     public Owner(){
 

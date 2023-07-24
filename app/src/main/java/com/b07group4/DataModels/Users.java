@@ -1,4 +1,4 @@
-package com.b07group4;
+package com.b07group4.DataModels;
 
 public class Users {
     private String id;

@@ -1,5 +1,9 @@
 package com.b07group4;
 
+import com.b07group4.DataModels.Order;
+import com.b07group4.DataModels.Owner;
+import com.b07group4.DataModels.Product;
+import com.b07group4.DataModels.Shopper;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
