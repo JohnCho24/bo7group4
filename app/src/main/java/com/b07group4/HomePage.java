@@ -9,10 +9,34 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 
 public class HomePage extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_home_page);
+        FirebaseApp.initializeApp(this);
+        DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference();
+    }
+
+    public void clickOwner(View view){
+        Intent intent = new Intent(this, LoginOwner.class);
+        startActivity(intent);
+    }
+
+    public void clickShopper(View view){
+        Intent intent = new Intent(this, LoginShopper.class);
+        startActivity(intent);
+    }
+}
+/* public class HomePage extends AppCompatActivity {
 
     FirebaseAuth auth;
     Button button;
@@ -58,4 +82,4 @@ public class HomePage extends AppCompatActivity {
         Intent intent = new Intent(this, LoginShopper.class);
         startActivity(intent);
     }
-}
+} */

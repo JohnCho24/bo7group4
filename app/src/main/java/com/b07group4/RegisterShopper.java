@@ -66,37 +66,45 @@ public class RegisterShopper extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 progressBar.setVisibility((View.VISIBLE));
-                String username, password;
-                username = String.valueOf(editTextUsernameShopper.getText());
-                password = String.valueOf(editTextPasswordShopper.getText());
+                String username = editTextUsernameShopper.getText().toString();
+                String password = editTextPasswordShopper.getText().toString();
 
-                if(TextUtils.isEmpty(username)) {
-                    Toast.makeText(RegisterShopper.this, "Enter username", Toast.LENGTH_SHORT).show();
+                if(TextUtils.isEmpty(username) || TextUtils.isEmpty(password)) {
+                    Toast.makeText(RegisterShopper.this, "Fill in all the fields please", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if(TextUtils.isEmpty(password)) {
-                    Toast.makeText(RegisterShopper.this, "Enter password", Toast.LENGTH_SHORT).show();
-                    return;
+                else{
+                    Shopper newShopper = new Shopper(username, password);
+                    DBHandler dbHandler = new DBHandler();
+                    dbHandler.addShopper(newShopper);
+                    Intent intent = new Intent(getApplicationContext(), LoginShopper.class);
+                    startActivity(intent);
+                    finish();
                 }
 
-                mAuth.createUserWithEmailAndPassword(username, password)
+                /* mAuth.createUserWithEmailAndPassword(username, password)
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 progressBar.setVisibility((View.GONE));
                                 if (task.isSuccessful()) {
+                                    Log.d("RegisterShopper", "Account created successfully.");
                                     Toast.makeText(RegisterShopper.this, "Account created.",
                                             Toast.LENGTH_SHORT).show();
+                                    Shopper newShopper = new Shopper(username, password);
+                                    DBHandler dbHandler = new DBHandler();
+                                    dbHandler.addShopper(newShopper);
                                     Intent intent = new Intent(getApplicationContext(), LoginShopper.class);
                                     startActivity(intent);
                                     finish();
                                 } else {
+                                    Log.e("RegisterShopper", "Error creating account: " + task.getException());
                                     // If sign in fails, display a message to the user.
                                     Toast.makeText(RegisterShopper.this, "Authentication failed.",
                                             Toast.LENGTH_SHORT).show();
                                 }
                             }
-                        });
+                        }); */
             }
         });
     }
