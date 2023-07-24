@@ -1,102 +1,106 @@
 package com.b07group4;
 
-import static android.content.ContentValues.TAG;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ProgressBar;
-import android.widget.TextView;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class RegisterShopper extends AppCompatActivity {
 
-    TextInputEditText editTextUsernameShopper, editTextPasswordShopper;
-    Button buttonReg;
-    FirebaseAuth mAuth;
-    ProgressBar progressBar;
-    TextView textView;
-
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null) {
-            Intent intent = new Intent(getApplicationContext(), HomePage.class);
-            startActivity(intent);
-            finish();
-        }
-    }
+    FirebaseDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register_shopper);
-        mAuth = FirebaseAuth.getInstance();
-        editTextUsernameShopper = findViewById(R.id.UsernameShopper);
-        editTextPasswordShopper = findViewById(R.id.PasswordShopper);
-        buttonReg = findViewById(R.id.RegisterShopperButton);
-        progressBar = findViewById(R.id.progressBar);
-        textView = findViewById((R.id.loginNow));
-        textView.setOnClickListener((new View.OnClickListener() {
+        setContentView(R.layout.activity_register_owner);
+        db = FirebaseDatabase.getInstance();
+    }
+
+    // Back button
+    public void onClickBack(View view){
+        Intent intent = new Intent(this, LoginOwner.class);
+        startActivity(intent);
+    }
+
+    public void onClickSignup(View view){
+        DatabaseReference ref = db.getReference();
+
+        // Store username as all lowercase
+        EditText userText = (EditText) findViewById(R.id.registerUsername);
+        String username = userText.getText().toString();
+
+        // Store
+        EditText userStore = (EditText) findViewById(R.id.registerStoreName);
+        String storeID = userStore.getText().toString();
+
+        // Password
+        EditText userPass = (EditText) findViewById(R.id.registerPassword);
+        String password = userPass.getText().toString();
+
+        // Password requirements
+        if(password.length() < 4){
+            Toast.makeText(RegisterOwner.this, "Password needs to be at least 5 characters long", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Make sure all fields are filled
+        if(TextUtils.isEmpty(username) || TextUtils.isEmpty(storeID) || TextUtils.isEmpty(password)){
+            Toast.makeText(RegisterOwner.this, "Please fill in all fields.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        DatabaseReference query = ref.child("Owners").child(username);
+
+        query.addValueEventListener(new ValueEventListener() {
+
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), LoginShopper.class);
-                startActivity(intent);
-                finish();
+            public void onDataChange(DataSnapshot snapshot) {
+                if(!snapshot.exists())
+                {
+                    // Blank
+                    userText.setText("");
+                    userStore.setText("");
+                    userPass.setText("");
+
+                    //
+                    //Owner newOwner = new Owner(username, storeID, password);
+
+                    // Store
+                    ref.child("Owners").child(username).child("StoreID").setValue(storeID);
+                    ref.child("Owners").child(username).child("password").setValue(password);
+
+                    // Account created message
+                    Toast.makeText(RegisterOwner.this, "Account created", Toast.LENGTH_SHORT).show();
+
+                    // Go to next screen
+                    Intent intent = new Intent(RegisterOwner.this, LoginOwner.class);
+                    startActivity(intent);
+                }
+
+                // Account already exists
+                else{
+                    Toast.makeText(RegisterOwner.this, "User already exists.", Toast.LENGTH_SHORT).show();
+                }
             }
-        }));
 
-        buttonReg.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                progressBar.setVisibility((View.VISIBLE));
-                String username, password;
-                username = String.valueOf(editTextUsernameShopper.getText());
-                password = String.valueOf(editTextPasswordShopper.getText());
-
-                if(TextUtils.isEmpty(username)) {
-                    Toast.makeText(RegisterShopper.this, "Enter username", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if(TextUtils.isEmpty(password)) {
-                    Toast.makeText(RegisterShopper.this, "Enter password", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                mAuth.createUserWithEmailAndPassword(username, password)
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                progressBar.setVisibility((View.GONE));
-                                if (task.isSuccessful()) {
-                                    Toast.makeText(RegisterShopper.this, "Account created.",
-                                            Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(getApplicationContext(), LoginShopper.class);
-                                    startActivity(intent);
-                                    finish();
-                                } else {
-                                    // If sign in fails, display a message to the user.
-                                    Toast.makeText(RegisterShopper.this, "Authentication failed.",
-                                            Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
+            public void onCancelled(DatabaseError error) {
             }
         });
     }
