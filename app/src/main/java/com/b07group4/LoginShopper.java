@@ -64,6 +64,10 @@ public class LoginShopper extends AppCompatActivity {
                     if(dataSnapshot.child("password").getValue(String.class).equals(password)){
                         Toast.makeText(LoginShopper.this, "Login Successful ", Toast.LENGTH_SHORT).show();
 
+                        // Redirect to Shopper page after login
+                        Intent intent = new Intent(LoginShopper.this, ShopperPage.class);
+                        startActivity(intent);
+
                         // Blank
                         userText.setText("");
                         userPass.setText("");
