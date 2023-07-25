@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/UsernameShopper"
+            android:id="@+id/shopperUsername"
             android:hint="@string/UsernameShopper"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
@@ -32,21 +32,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/PasswordShopper"
+            android:id="@+id/shopperPassword"
             android:hint="@string/PasswordShopper"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </com.google.android.material.textfield.TextInputLayout>
 
-    <ProgressBar
-        android:id="@id/progressBar"
-        android:visibility="gone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
     <Button
         android:id="@+id/LoginShopperButton"
         android:text="@string/LoginShopper"
+        android:onClick="onClickShopperLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
@@ -54,7 +49,7 @@
         android:id="@+id/shopperToHome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="clickHome"
+        android:onClick="clickShopperHome"
         android:text="Home"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -63,12 +58,14 @@
         app:layout_constraintVertical_bias="0.832" />
 
     <TextView
-        android:textStyle="bold"
-        android:textSize="20sp"
-        android:gravity="center"
-        android:layout_marginTop="20dp"
-        android:id="@+id/registerNow"
-        android:text="@string/click_to_register"
+        android:id="@+id/shopperToRegister"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:onClick="clickShopperSignup"
+        android:text="@string/click_to_register"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        tools:text="Don't have an account? Click here!" />
 </LinearLayout>

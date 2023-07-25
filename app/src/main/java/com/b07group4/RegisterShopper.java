@@ -1,6 +1,5 @@
 package com.b07group4;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -10,11 +9,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,26 +22,26 @@ public class RegisterShopper extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register_owner);
+        setContentView(R.layout.activity_register_shopper);
         db = FirebaseDatabase.getInstance();
     }
 
-    // Back button
-    public void onClickBack(View view){
-        Intent intent = new Intent(this, LoginOwner.class);
+    public void clickShopperHome(View view){
+        Intent intent = new Intent(this, HomePage.class);
         startActivity(intent);
     }
 
-    public void onClickSignup(View view){
+    public void clickShopperLogin(View view){
+        Intent intent = new Intent(this, LoginShopper.class);
+        startActivity(intent);
+    }
+
+    public void onClickShopperSignup(View view){
         DatabaseReference ref = db.getReference();
 
         // Store username as all lowercase
         EditText userText = (EditText) findViewById(R.id.registerUsername);
         String username = userText.getText().toString();
-
-        // Store
-        EditText userStore = (EditText) findViewById(R.id.registerStoreName);
-        String storeID = userStore.getText().toString();
 
         // Password
         EditText userPass = (EditText) findViewById(R.id.registerPassword);
@@ -55,17 +49,17 @@ public class RegisterShopper extends AppCompatActivity {
 
         // Password requirements
         if(password.length() < 4){
-            Toast.makeText(RegisterOwner.this, "Password needs to be at least 5 characters long", Toast.LENGTH_SHORT).show();
+            Toast.makeText(RegisterShopper.this, "Password needs to be at least 5 characters long", Toast.LENGTH_SHORT).show();
             return;
         }
 
         // Make sure all fields are filled
-        if(TextUtils.isEmpty(username) || TextUtils.isEmpty(storeID) || TextUtils.isEmpty(password)){
-            Toast.makeText(RegisterOwner.this, "Please fill in all fields.", Toast.LENGTH_SHORT).show();
+        if(TextUtils.isEmpty(username) || TextUtils.isEmpty(password)){
+            Toast.makeText(RegisterShopper.this, "Please fill in all fields.", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        DatabaseReference query = ref.child("Owners").child(username);
+        DatabaseReference query = ref.child("Shoppers").child(username);
 
         query.addValueEventListener(new ValueEventListener() {
 
@@ -75,27 +69,25 @@ public class RegisterShopper extends AppCompatActivity {
                 {
                     // Blank
                     userText.setText("");
-                    userStore.setText("");
                     userPass.setText("");
 
                     //
-                    //Owner newOwner = new Owner(username, storeID, password);
+                    //Shopper newShopper = new Shopper(username, password);
 
                     // Store
-                    ref.child("Owners").child(username).child("StoreID").setValue(storeID);
-                    ref.child("Owners").child(username).child("password").setValue(password);
+                    ref.child("Shoppers").child(username).child("password").setValue(password);
 
                     // Account created message
-                    Toast.makeText(RegisterOwner.this, "Account created", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterShopper.this, "Account created", Toast.LENGTH_SHORT).show();
 
                     // Go to next screen
-                    Intent intent = new Intent(RegisterOwner.this, LoginOwner.class);
+                    Intent intent = new Intent(RegisterShopper.this, LoginShopper.class);
                     startActivity(intent);
                 }
 
                 // Account already exists
                 else{
-                    Toast.makeText(RegisterOwner.this, "User already exists.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterShopper.this, "User already exists.", Toast.LENGTH_SHORT).show();
                 }
             }
 

@@ -22,28 +22,28 @@ public class LoginShopper extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login_owner);
+        setContentView(R.layout.activity_login_shopper);
         db = FirebaseDatabase.getInstance();
     }
 
-    public void clickHome(View view){
+    public void clickShopperHome(View view){
         Intent intent = new Intent(this, HomePage.class);
         startActivity(intent);
     }
 
-    public void clickSignup(View view){
-        Intent intent = new Intent(this, RegisterOwner.class);
+    public void clickShopperSignup(View view){
+        Intent intent = new Intent(this, RegisterShopper.class);
         startActivity(intent);
     }
 
-    public void onClickLogin(View view){
+    public void onClickShopperLogin(View view){
 
         // Username
-        EditText userText = (EditText) findViewById(R.id.ownerUsername);
+        EditText userText = (EditText) findViewById(R.id.shopperUsername);
         String username = userText.getText().toString();
 
         // Password
-        EditText userPass = (EditText) findViewById(R.id.ownerPassword);
+        EditText userPass = (EditText) findViewById(R.id.shopperPassword);
         String password = userPass.getText().toString();
 
         // Blank
@@ -52,7 +52,7 @@ public class LoginShopper extends AppCompatActivity {
             return;
         }
 
-        DatabaseReference usersRef = db.getReference("Owners");
+        DatabaseReference usersRef = db.getReference("Shoppers");
         usersRef.child(username).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -62,7 +62,7 @@ public class LoginShopper extends AppCompatActivity {
 
                     // Check if password is correct
                     if(dataSnapshot.child("password").getValue(String.class).equals(password)){
-                        Toast.makeText(LoginOwner.this, "Login Successful ", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginShopper.this, "Login Successful ", Toast.LENGTH_SHORT).show();
 
                         // Blank
                         userText.setText("");
@@ -72,14 +72,14 @@ public class LoginShopper extends AppCompatActivity {
 
                     }
                     else{
-                        Toast.makeText(LoginOwner.this, "Password Incorrect", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginShopper.this, "Password Incorrect", Toast.LENGTH_SHORT).show();
                         userPass.setText("");
                     }
                 }
 
                 // User not found
                 else {
-                    Toast.makeText(LoginOwner.this, "User not found", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginShopper.this, "User not found", Toast.LENGTH_SHORT).show();
                 }
             }
 
