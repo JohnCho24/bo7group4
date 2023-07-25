@@ -46,12 +46,14 @@ public class LoginOwner extends AppCompatActivity {
         EditText userPass = (EditText) findViewById(R.id.ownerPassword);
         String password = userPass.getText().toString();
 
-        // Blank
+        // Make sure fields are filled
         if(TextUtils.isEmpty(username) || TextUtils.isEmpty(password)){
             Toast.makeText(this, "Please enter username & password", Toast.LENGTH_SHORT).show();
             return;
         }
 
+
+        // Database stuff
         DatabaseReference usersRef = db.getReference("Owners");
         usersRef.child(username).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -68,7 +70,9 @@ public class LoginOwner extends AppCompatActivity {
                         userText.setText("");
                         userPass.setText("");
 
-                        //
+                        // ******************** ADVANCE ********************
+                        Intent intent = new Intent(LoginOwner.this, Shop.class);
+                        startActivity(intent);
 
                     }
                     else{
