@@ -7,10 +7,10 @@
     android:orientation="vertical"
     android:gravity="center"
     android:padding="15dp"
-    tools:context=".LoginShopper">
+    tools:context=".RegisterShopper">
 
     <TextView
-        android:text="@string/LoginShopperHeader"
+        android:text="@string/RegisterShopperHeader"
         android:textSize="25sp"
         android:textStyle="bold"
         android:gravity="center"
@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/shopperUsername"
+            android:id="@+id/registerUsername"
             android:hint="@string/UsernameShopper"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
@@ -32,16 +32,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/shopperPassword"
+            android:id="@+id/registerPassword"
             android:hint="@string/PasswordShopper"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/LoginShopperButton"
-        android:text="@string/LoginShopper"
-        android:onClick="onClickShopperLogin"
+        android:id="@+id/RegisterShopperButton"
+        android:onClick="onClickShopperSignup"
+        android:text="@string/RegisterShopper"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
@@ -49,7 +49,7 @@
         android:id="@+id/shopperToHome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="clickShopperHome"
+        android:onClick="clickHome"
         android:text="Home"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -58,14 +58,14 @@
         app:layout_constraintVertical_bias="0.832" />
 
     <TextView
-        android:id="@+id/shopperToRegister"
+        android:id="@+id/shopperToLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:gravity="center"
-        android:onClick="clickShopperSignup"
-        android:text="@string/click_to_register"
+        android:onClick="clickShopperLogin"
+        android:text="@string/click_to_login"
         android:textSize="20sp"
         android:textStyle="bold"
-        tools:text="Don't have an account? Click here!" />
+        tools:text="Already have an account? Click here!" />
 </LinearLayout>
