@@ -36,7 +36,7 @@ public class LoginOwner extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void onClickLogin(View view){
+    public void onClickLogin(View view) {
 
         // Username
         EditText userText = (EditText) findViewById(R.id.ownerUsername);
@@ -47,11 +47,10 @@ public class LoginOwner extends AppCompatActivity {
         String password = userPass.getText().toString();
 
         // Make sure fields are filled
-        if(TextUtils.isEmpty(username) || TextUtils.isEmpty(password)){
+        if (TextUtils.isEmpty(username) || TextUtils.isEmpty(password)) {
             Toast.makeText(this, "Please enter username & password", Toast.LENGTH_SHORT).show();
             return;
         }
-
 
         // Database stuff
         DatabaseReference usersRef = db.getReference("Owners");
@@ -63,19 +62,19 @@ public class LoginOwner extends AppCompatActivity {
                 if (dataSnapshot.exists()) {
 
                     // Check if password is correct
-                    if(dataSnapshot.child("password").getValue(String.class).equals(password)){
+                    if (dataSnapshot.child("password").getValue(String.class).equals(password)) {
                         Toast.makeText(LoginOwner.this, "Login Successful ", Toast.LENGTH_SHORT).show();
 
                         // Blank
                         userText.setText("");
                         userPass.setText("");
 
-                        // ******************** ADVANCE ********************
+                        // Redirect to the Shop activity and pass the owner's name
                         Intent intent = new Intent(LoginOwner.this, Shop.class);
-                        startActivity(intent);
+                        intent.putExtra("OWNER_NAME", username); // Pass the owner's name to the next activity
+                        startActivityForResult(intent, 1);
 
-                    }
-                    else{
+                    } else {
                         Toast.makeText(LoginOwner.this, "Password Incorrect", Toast.LENGTH_SHORT).show();
                         userPass.setText("");
                     }
@@ -93,4 +92,16 @@ public class LoginOwner extends AppCompatActivity {
         });
     }
 
+    // Add this method to handle the result from the Shop activity
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            if (resultCode == RESULT_OK) {
+                // Handle the result from the Shop activity, if needed
+            } else if (resultCode == RESULT_CANCELED) {
+                // Handle the case where the Shop activity was cancelled, if needed
+            }
+        }
+    }
 }
