@@ -3,6 +3,7 @@ package com.b07group4;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -63,6 +64,10 @@ public class LoginShopper extends AppCompatActivity {
                     // Check if password is correct
                     if(dataSnapshot.child("password").getValue(String.class).equals(password)){
                         Toast.makeText(LoginShopper.this, "Login Successful ", Toast.LENGTH_SHORT).show();
+                        SharedPreferences preferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);// helps you remember login info when in different pages
+                        SharedPreferences.Editor editor = preferences.edit();
+                        editor.putString("currentUser", username);
+                        editor.apply();
 
                         // Redirect to Shopper page after login
                         Intent intent = new Intent(LoginShopper.this, ShopperPage.class);
@@ -85,6 +90,12 @@ public class LoginShopper extends AppCompatActivity {
                 else {
                     Toast.makeText(LoginShopper.this, "User not found", Toast.LENGTH_SHORT).show();
                 }
+            }
+            public void clearData() {
+                SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.clear();
+                editor.apply();
             }
 
             @Override
