@@ -9,61 +9,6 @@
     android:padding="15dp"
     tools:context=".RegisterOwner">
 
-<!--    <EditText-->
-<!--        android:id="@+id/registerUsername"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="268dp"-->
-<!--        android:ems="10"-->
-<!--        android:hint="Username"-->
-<!--        android:inputType="text"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.497"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
-
-<!--    <EditText-->
-<!--        android:id="@+id/registerPassword"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginBottom="304dp"-->
-<!--        android:ems="10"-->
-<!--        android:hint="Password"-->
-<!--        android:inputType="textPassword"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.497"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/registerUsername" />-->
-
-<!--    <Button-->
-<!--        android:id="@+id/ownerRegisterButton"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:onClick="onClickSignup"-->
-<!--        android:text="Signup"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/registerPassword" />-->
-
-<!--    <Button-->
-<!--        android:id="@+id/back"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="16dp"-->
-<!--        android:onClick="onClickBack"-->
-<!--        android:text="Back"-->
-<!--        app:layout_constraintBottom_toTopOf="@+id/registerUsername"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.498"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:layout_constraintVertical_bias="0.138" />-->
-
-
-
-
     <TextView
         android:text="Owner Registration"
         android:textSize="25sp"
