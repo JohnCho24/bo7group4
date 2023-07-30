@@ -32,16 +32,17 @@ public class RegisterOwner extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void onClickHome(View view){
+        Intent intent = new Intent(this, HomePage.class);
+        startActivity(intent);
+    }
+
     public void onClickSignup(View view){
         DatabaseReference ref = db.getReference();
 
         // Store username as all lowercase
         EditText userText = (EditText) findViewById(R.id.registerUsername);
         String username = userText.getText().toString();
-
-        // Store
-        EditText userStore = (EditText) findViewById(R.id.registerStoreName);
-        String storeID = userStore.getText().toString();
 
         // Password
         EditText userPass = (EditText) findViewById(R.id.registerPassword);
@@ -54,7 +55,7 @@ public class RegisterOwner extends AppCompatActivity {
         }
 
         // Make sure all fields are filled
-        if(TextUtils.isEmpty(username) || TextUtils.isEmpty(storeID) || TextUtils.isEmpty(password)){
+        if(TextUtils.isEmpty(username) || TextUtils.isEmpty(password)){
             Toast.makeText(RegisterOwner.this, "Please fill in all fields.", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -62,34 +63,37 @@ public class RegisterOwner extends AppCompatActivity {
         DatabaseReference query = ref.child("Owners").child(username);
 
         query.addValueEventListener(new ValueEventListener() {
-
+            private boolean isAccountCreated = false;
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-                if(!snapshot.exists())
-                {
-                    // Blank
-                    userText.setText("");
-                    userStore.setText("");
-                    userPass.setText("");
 
-                    //
-                    //Owner newOwner = new Owner(username, storeID, password);
+                // Check if account is not created yet
+                if (!isAccountCreated) {
 
-                    // Store
-                    ref.child("Owners").child(username).child("StoreID").setValue(storeID);
-                    ref.child("Owners").child(username).child("password").setValue(password);
+                    // Account doesn't exist yet
+                    if (!snapshot.exists()) {
+                        // Blank
+                        userText.setText("");
+                        userPass.setText("");
 
-                    // Account created message
-                    Toast.makeText(RegisterOwner.this, "Account created", Toast.LENGTH_SHORT).show();
+                        // Store
+                        ref.child("Owners").child(username).child("password").setValue(password);
 
-                    // Go to next screen
-                    Intent intent = new Intent(RegisterOwner.this, LoginOwner.class);
-                    startActivity(intent);
-                }
+                        // Account created message
+                        Toast.makeText(RegisterOwner.this, "Account created", Toast.LENGTH_SHORT).show();
 
-                // Account already exists
-                else{
-                    Toast.makeText(RegisterOwner.this, "User already exists.", Toast.LENGTH_SHORT).show();
+                        // Go to next screen
+                        Intent intent = new Intent(RegisterOwner.this, LoginOwner.class);
+                        startActivity(intent);
+
+                        // Set the flag to true to indicate account creation
+                        isAccountCreated = true;
+                    }
+                    // Account already exists
+                    else {
+                        // Account already exists
+                        Toast.makeText(RegisterOwner.this, "User already exists.", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
 

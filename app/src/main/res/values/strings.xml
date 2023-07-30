@@ -6,7 +6,7 @@
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
-    <string name="title_activity_owner_login">OwnerLogin</string>
+    <string name="title_activity_owner_login">Owner Login</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in or register</string>
@@ -15,7 +15,7 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
-    <string name="title_activity_login_owner">LoginOwner</string>
+    <string name="title_activity_login_owner">Login Owner</string>
     <string name="LoginShopper">Login</string>
     <string name="UsernameShopper">Username</string>
     <string name="PasswordShopper">Password</string>
@@ -25,4 +25,7 @@
     <string name="click_to_login">Click to login!</string>
     <string name="click_to_register">Click to register!</string>
     <string name="logout">Logout</string>
+
+
+
 </resources>
