@@ -36,7 +36,7 @@ public class LoginOwner extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void onClickLogin(View view){
+    public void onClickOwnerLogin(View view){
 
         // Username
         EditText userText = (EditText) findViewById(R.id.ownerUsername);
