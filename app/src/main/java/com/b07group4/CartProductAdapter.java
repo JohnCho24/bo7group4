@@ -11,29 +11,29 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
+public class CartProductAdapter extends RecyclerView.Adapter<CartProductAdapter.CartProductViewHolder> {
     private List<Product> productList;
     private List<Product> originalList;
 
-    public ProductAdapter(List<Product> productList) {
+    public CartProductAdapter(List<Product> productList) {
         this.productList = productList;
         this.originalList = new ArrayList<>(productList);
     }
 
-    public void filterList(List<Product> filteredList) {
+    public void CartfilterList(List<Product> filteredList) {
         productList = filteredList;
         notifyDataSetChanged();
     }
 
     @NonNull
     @Override
-    public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public CartProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_product, parent, false);
-        return new ProductViewHolder(view);
+        return new CartProductViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CartProductViewHolder holder, int position) {
         Product product = productList.get(position);
         holder.productIdTextView.setText(product.getProductId());
         holder.priceTextView.setText(String.valueOf(product.getPrice()));
@@ -44,11 +44,11 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         return productList.size();
     }
 
-    public static class ProductViewHolder extends RecyclerView.ViewHolder {
+    public static class CartProductViewHolder extends RecyclerView.ViewHolder {
         TextView productIdTextView;
         TextView priceTextView;
 
-        public ProductViewHolder(@NonNull View itemView) {
+        public CartProductViewHolder(@NonNull View itemView) {
             super(itemView);
             productIdTextView = itemView.findViewById(R.id.tv_product_id);
             priceTextView = itemView.findViewById(R.id.tv_product_price);

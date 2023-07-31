@@ -26,7 +26,7 @@ import java.util.Locale;
 public class ShopperCart extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    private ProductAdapter productAdapter;
+    private CartProductAdapter productAdapter;
     private List<Product> productList;
     private double totalProductPrice = 0.0;
     private TextView tvTotalPrice;
@@ -42,7 +42,7 @@ public class ShopperCart extends AppCompatActivity {
         tvTotalPrice = findViewById(R.id.tv_total_price);
 
         productList = new ArrayList<>();
-        productAdapter = new ProductAdapter(productList);
+        productAdapter = new CartProductAdapter(productList);
         recyclerView.setAdapter(productAdapter);
 
         // Fetch product data from Firebase Realtime Database
@@ -105,6 +105,6 @@ public class ShopperCart extends AppCompatActivity {
                 }
             }
         }
-        productAdapter.filterList(filteredList);
+        productAdapter.CartfilterList(filteredList);
     }
 }
