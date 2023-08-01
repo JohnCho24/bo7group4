@@ -1,6 +1,6 @@
 package com.b07group4;
 
-public class Orders {
+public class Order {
 
     String orderstatus;
     String brand;
@@ -10,7 +10,7 @@ public class Orders {
     int quantity;
     String storeId;
 
-    public Orders(String orderstatus, String brand, String info, String name, double price, int quantity, String storeId) {
+    public Order(String orderstatus, String brand, String info, String name, double price, int quantity, String storeId) {
         this.orderstatus = orderstatus;
         this.brand = brand;
         this.info = info;
