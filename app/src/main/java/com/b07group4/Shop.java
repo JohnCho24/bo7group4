@@ -39,7 +39,9 @@ public class Shop extends AppCompatActivity {
                     // Store ID found, set it to the textViewStore
                     String storeId = dataSnapshot.getValue(String.class);
                     textViewStore.setText(storeId);
-                } else {
+                }
+
+                else {
                     // Owner or store not found, handle the case
                     textViewStore.setText("Store not found");
                 }
@@ -52,25 +54,38 @@ public class Shop extends AppCompatActivity {
             }
         });
 
-        Button btnOrders = findViewById(R.id.btnOrders);
-        Button btnInventory = findViewById(R.id.btnInventory);
+//        Button btnOrders = findViewById(R.id.btnOrders);
+//        Button btnInventory = findViewById(R.id.btnInventory);
+//
+//        btnOrders.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                // Redirect to OwnersOrders activity
+//                Intent intent = new Intent(Shop.this, OwnersOrders.class);
+//                startActivity(intent);
+//            }
+//        });
+//
+//        btnInventory.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                // Redirect to OwnerInventory activity
+//                Intent intent = new Intent(Shop.this, OwnerInventory.class);
+//                startActivity(intent);
+//            }
+//        });
 
-        btnOrders.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Redirect to OwnersOrders activity
-                Intent intent = new Intent(Shop.this, OwnersOrders.class);
-                startActivity(intent);
-            }
-        });
+    }
 
-        btnInventory.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Redirect to OwnerInventory activity
-                Intent intent = new Intent(Shop.this, OwnerInventory.class);
-                startActivity(intent);
-            }
-        });
+    // Button to go to orders page
+    public void onClickOrders(View view){
+        Intent intent = new Intent(this, OwnersOrders.class);
+        startActivity(intent);
+    }
+
+    // Button to go to inventory page
+    public void onClickInventory(View view){
+        Intent intent = new Intent(this, OwnerInventory.class);
+        startActivity(intent);
     }
 }
