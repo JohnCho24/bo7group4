@@ -6,6 +6,7 @@
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
+    <string name="title_activity_owners_orders">OwnersOrders</string>
     <string name="title_activity_owner_login">Owner Login</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
@@ -25,7 +26,4 @@
     <string name="click_to_login">Click to login!</string>
     <string name="click_to_register">Click to register!</string>
     <string name="logout">Logout</string>
-    <string name="title_activity_owners_orders">OwnersOrders</string>
-
-
 </resources>

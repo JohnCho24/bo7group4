@@ -54,6 +54,11 @@ public class LoginOwner extends AppCompatActivity {
 
         // Database stuff
         DatabaseReference usersRef = db.getReference("Owners");
+//        DataSnapshot res = usersRef.child(username).get().getResult();
+//        if (res.exists()) {
+//
+//        }
+
         usersRef.child(username).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -72,7 +77,7 @@ public class LoginOwner extends AppCompatActivity {
                         // Redirect to the Shop activity and pass the owner's name
                         Intent intent = new Intent(LoginOwner.this, Shop.class);
                         intent.putExtra("OWNER_NAME", username); // Pass the owner's name to the next activity
-                        startActivityForResult(intent, 1);
+                        startActivity(intent);
 
                     } else {
                         Toast.makeText(LoginOwner.this, "Password Incorrect", Toast.LENGTH_SHORT).show();
@@ -90,18 +95,5 @@ public class LoginOwner extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
             }
         });
-    }
-
-    // Add this method to handle the result from the Shop activity
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1) {
-            if (resultCode == RESULT_OK) {
-                // Handle the result from the Shop activity, if needed
-            } else if (resultCode == RESULT_CANCELED) {
-                // Handle the case where the Shop activity was cancelled, if needed
-            }
-        }
     }
 }
