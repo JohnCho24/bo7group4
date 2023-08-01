@@ -2,70 +2,40 @@ package com.b07group4;
 
 public class Order {
 
-    String orderstatus;
-    String brand;
-    String info;
-    String name;
-    double price;
-    int quantity;
+    String orderId;
+    String shopperId;
+    String status;
     String storeId;
 
-    public Order(String orderstatus, String brand, String info, String name, double price, int quantity, String storeId) {
-        this.orderstatus = orderstatus;
-        this.brand = brand;
-        this.info = info;
-        this.name = name;
-        this.price = price;
-        this.quantity = quantity;
+    public Order(String orderId, String shopperId, String status, String storeId) {
+        this.orderId = orderId;
+        this.shopperId = shopperId;
+        this.status = status;
         this.storeId = storeId;
     }
 
-    public String getOrderstatus() {
-        return orderstatus;
+    public String getOrderId() {
+        return orderId;
     }
 
-    public void setOrderstatus(String orderstatus) {
-        this.orderstatus = orderstatus;
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
     }
 
-    public String getBrand() {
-        return brand;
+    public String getShopperId() {
+        return shopperId;
     }
 
-    public void setBrand(String brand) {
-        this.brand = brand;
+    public void setShopperId(String shopperId) {
+        this.shopperId = shopperId;
     }
 
-    public String getInfo() {
-        return info;
+    public String getStatus() {
+        return status;
     }
 
-    public void setInfo(String info) {
-        this.info = info;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getStoreId() {
