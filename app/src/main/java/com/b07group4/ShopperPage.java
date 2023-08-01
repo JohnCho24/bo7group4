@@ -1,6 +1,7 @@
 package com.b07group4;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -35,7 +36,7 @@ public class ShopperPage extends AppCompatActivity {
         String currentUser = preferences.getString("currentUser", "");
         //Log.d("user", currentUser);
         recyclerViewStores = findViewById(R.id.recyclerViewStores);
-        recyclerViewStores.setLayoutManager(new LinearLayoutManager(this));
+        recyclerViewStores.setLayoutManager(new GridLayoutManager(this,1));
         ownersRef = FirebaseDatabase.getInstance().getReference("Owners");
         storeList = new ArrayList<>();
         storeViewAdapter = new StoreViewAdapter(storeList);

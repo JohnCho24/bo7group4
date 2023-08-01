@@ -6,18 +6,16 @@ public class Product {
     private String info;
     private String name;
     private double price;
-    private int quantity;
     private String storeId;
 
     public Product() {
     }
-    public Product(String brand, String imageURL, String info, String name, double price, int quantity, String storeId) {
+    public Product(String brand, String imageURL, String info, String name, double price,  String storeId) {
         this.brand = brand;
         this.imageURL = imageURL;
         this.info = info;
         this.name = name;
         this.price = price;
-        this.quantity = quantity;
         this.storeId = storeId;
     }
 
@@ -41,9 +39,6 @@ public class Product {
         return price;
     }
 
-    public int getQuantity() {
-        return quantity;
-    }
 
     public String getStoreId() {
         return storeId;
@@ -67,10 +62,6 @@ public class Product {
 
     public void setPrice(double price) {
         this.price = price;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
     }
 
     public void setStoreId(String storeId) {
