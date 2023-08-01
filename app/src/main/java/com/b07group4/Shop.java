@@ -53,28 +53,6 @@ public class Shop extends AppCompatActivity {
                 textViewStore.setText("Error fetching store ID");
             }
         });
-
-//        Button btnOrders = findViewById(R.id.btnOrders);
-//        Button btnInventory = findViewById(R.id.btnInventory);
-//
-//        btnOrders.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                // Redirect to OwnersOrders activity
-//                Intent intent = new Intent(Shop.this, OwnersOrders.class);
-//                startActivity(intent);
-//            }
-//        });
-//
-//        btnInventory.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                // Redirect to OwnerInventory activity
-//                Intent intent = new Intent(Shop.this, OwnerInventory.class);
-//                startActivity(intent);
-//            }
-//        });
-
     }
 
     // Button to go to orders page

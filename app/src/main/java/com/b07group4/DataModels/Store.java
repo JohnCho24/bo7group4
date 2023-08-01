@@ -1,4 +1,6 @@
-package com.b07group4;
+package com.b07group4.DataModels;
+
+import com.b07group4.DataModels.Product;
 
 import java.util.List;
 

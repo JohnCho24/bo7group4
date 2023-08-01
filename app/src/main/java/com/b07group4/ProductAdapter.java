@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.b07group4.DataModels.Product;
+
 import java.util.List;
 
 public class ProductAdapter extends ArrayAdapter<Product> {
