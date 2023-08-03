@@ -1,23 +1,16 @@
 package com.b07group4.DataModels;
 
-public class Product {
-    public String name;
-    public double price;
-    public String brand;
-    public String info;
-    public int quantity;
-    public String id;
-    public String image;
+import com.b07group4.DBHandler.ProductManager;
 
-    public Product(String n, double p, String b, String in, int q, String id, String im) {
-        this.name = n;
-        this.price = p;
-        this.brand = b;
-        this.info = in;
-        this.quantity = q;
-        this.id = id;
-        this.image = im;
-    }
+public class Product {
+    private String name;
+    private double price;
+    private String brand;
+    private String info;
+    private String id;
+    private String owner_id;
+
+    public Product() {}
 
     public String getName() {
         return name;
@@ -51,14 +44,6 @@ public class Product {
         this.info = info;
     }
 
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
     public String getId() {
         return id;
     }
@@ -67,11 +52,11 @@ public class Product {
         this.id = id;
     }
 
-    public String getImage() {
-        return image;
+    public String getOwner_id() {
+        return owner_id;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setOwner_id(String owner_id) {
+        this.owner_id = owner_id;
     }
 }

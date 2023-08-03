@@ -26,4 +26,9 @@
     <string name="click_to_login">Click to login!</string>
     <string name="click_to_register">Click to register!</string>
     <string name="logout">Logout</string>
+    <string name="add_product">Add product</string>
+    <string name="name">Name</string>
+    <string name="brand">Brand</string>
+    <string name="price">Price</string>
+    <string name="info">Info</string>
 </resources>

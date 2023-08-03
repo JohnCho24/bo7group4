@@ -58,12 +58,14 @@ public class Shop extends AppCompatActivity {
     // Button to go to orders page
     public void onClickOrders(View view){
         Intent intent = new Intent(this, OwnersOrders.class);
+        intent.putExtra("OWNER_NAME", ownerName);
         startActivity(intent);
     }
 
     // Button to go to inventory page
     public void onClickInventory(View view){
         Intent intent = new Intent(this, OwnerInventory.class);
+        intent.putExtra("OWNER_NAME", ownerName);
         startActivity(intent);
     }
 }

@@ -38,6 +38,7 @@ public class ProductManager {
     public Product Create(Product product) {
         String key = db.push().getKey();
         db.child(key).setValue(product);
+        product.setId(key);
         return product;
     }
 

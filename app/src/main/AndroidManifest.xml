@@ -47,6 +47,9 @@
         <activity
             android:name=".OwnerInventory"
             android:exported="false" />
+        <activity
+            android:name=".CreateProduct"
+            android:exported="false" />
     </application>
 
 </manifest>

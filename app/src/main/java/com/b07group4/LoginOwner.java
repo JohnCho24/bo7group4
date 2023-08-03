@@ -54,10 +54,6 @@ public class LoginOwner extends AppCompatActivity {
 
         // Database stuff
         DatabaseReference usersRef = db.getReference("Owners");
-//        DataSnapshot res = usersRef.child(username).get().getResult();
-//        if (res.exists()) {
-//
-//        }
 
         usersRef.child(username).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
