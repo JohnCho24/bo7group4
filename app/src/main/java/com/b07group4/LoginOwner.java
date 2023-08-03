@@ -47,14 +47,14 @@ public class LoginOwner extends AppCompatActivity {
         String password = userPass.getText().toString();
 
         // Make sure fields are filled
-        if(TextUtils.isEmpty(username) || TextUtils.isEmpty(password)){
+        if (TextUtils.isEmpty(username) || TextUtils.isEmpty(password)) {
             Toast.makeText(this, "Please enter username & password", Toast.LENGTH_SHORT).show();
             return;
         }
 
-
         // Database stuff
         DatabaseReference usersRef = db.getReference("Owners");
+
         usersRef.child(username).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -63,19 +63,21 @@ public class LoginOwner extends AppCompatActivity {
                 if (dataSnapshot.exists()) {
 
                     // Check if password is correct
-                    if(dataSnapshot.child("password").getValue(String.class).equals(password)){
+                    if (dataSnapshot.child("password").getValue(String.class).equals(password)) {
                         Toast.makeText(LoginOwner.this, "Login Successful ", Toast.LENGTH_SHORT).show();
 
                         // Blank
                         userText.setText("");
                         userPass.setText("");
 
-                        // ******************** ADVANCE ********************
+                        String storeName = dataSnapshot.child("store_name").getValue(String.class);
+                        // Redirect to the Shop activity and pass the owner's name
                         Intent intent = new Intent(LoginOwner.this, Shop.class);
+                        intent.putExtra("OWNER_NAME", username); // Pass the owner's name to the next activity
+                        intent.putExtra("STORE_NAME", storeName);
                         startActivity(intent);
 
-                    }
-                    else{
+                    } else {
                         Toast.makeText(LoginOwner.this, "Password Incorrect", Toast.LENGTH_SHORT).show();
                         userPass.setText("");
                     }
@@ -92,5 +94,4 @@ public class LoginOwner extends AppCompatActivity {
             }
         });
     }
-
 }

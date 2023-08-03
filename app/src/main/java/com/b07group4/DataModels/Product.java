@@ -1,70 +1,73 @@
 package com.b07group4.DataModels;
 
 public class Product {
-    private String brand;
-    private String imageURL;
-    private String info;
     private String name;
     private double price;
-    private String storeId;
+    private String brand;
+    private String info;
+    private String id;
+    private String owner_id;
+    private static final Product placeholder = new Product("Hello", "World", 12.34, "Java is bad!");
 
     public Product() {
     }
-    public Product(String brand, String imageURL, String info, String name, double price,  String storeId) {
-        this.brand = brand;
-        this.imageURL = imageURL;
-        this.info = info;
+
+    private Product(String name, String brand, double price, String info) {
         this.name = name;
+        this.brand = brand;
         this.price = price;
-        this.storeId = storeId;
+        this.info = info;
     }
 
-    public String getBrand() {
-        return brand;
-    }
-
-    public String getImageURL() {
-        return imageURL;
-    }
-
-    public String getInfo() {
-        return info;
+    public static Product getPlaceholder() {
+        return placeholder;
     }
 
     public String getName() {
         return name;
     }
 
-    public double getPrice() {
-        return price;
-    }
-
-
-    public String getStoreId() {
-        return storeId;
-    }
-
-    public void setBrand(String brand) {
-        this.brand = brand;
-    }
-
-    public void setImageURL(String imageURL) {
-        this.imageURL = imageURL;
-    }
-
-    public void setInfo(String info) {
-        this.info = info;
-    }
-
     public void setName(String name) {
         this.name = name;
+    }
+
+    public double getPrice() {
+        return price;
     }
 
     public void setPrice(double price) {
         this.price = price;
     }
 
-    public void setStoreId(String storeId) {
-        this.storeId = storeId;
+    public String getInfo() {
+        return info;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getOwner_id() {
+        return owner_id;
+    }
+
+    public void setOwner_id(String owner_id) {
+        this.owner_id = owner_id;
     }
 }
