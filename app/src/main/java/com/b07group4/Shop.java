@@ -3,12 +3,12 @@ package com.b07group4;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.b07group4.owner_inventory.OwnerInventory;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -17,7 +17,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class Shop extends AppCompatActivity {
 
-    private String ownerName;
+    private String ownerName, storeName;
     private TextView textViewStore;
 
     @Override
@@ -29,6 +29,7 @@ public class Shop extends AppCompatActivity {
 
         // Get the owner's name from the intent extra
         ownerName = getIntent().getStringExtra("OWNER_NAME");
+        storeName = getIntent().getStringExtra("STORE_NAME");
 
         // Query the database to fetch the store ID based on the owner's name
         DatabaseReference ownersRef = FirebaseDatabase.getInstance().getReference("Owners");
@@ -59,6 +60,7 @@ public class Shop extends AppCompatActivity {
     public void onClickOrders(View view){
         Intent intent = new Intent(this, OwnersOrders.class);
         intent.putExtra("OWNER_NAME", ownerName);
+        intent.putExtra("STORE_NAME", storeName);
         startActivity(intent);
     }
 
@@ -66,6 +68,7 @@ public class Shop extends AppCompatActivity {
     public void onClickInventory(View view){
         Intent intent = new Intent(this, OwnerInventory.class);
         intent.putExtra("OWNER_NAME", ownerName);
+        intent.putExtra("STORE_NAME", storeName);
         startActivity(intent);
     }
 }

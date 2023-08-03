@@ -9,8 +9,19 @@ public class Product {
     private String info;
     private String id;
     private String owner_id;
+    private static final Product placeholder = new Product("Hello", "World", 12.34, "Java is bad!");
 
     public Product() {}
+    private Product(String name, String brand, double price, String info) {
+        this.name = name;
+        this.brand = brand;
+        this.price = price;
+        this.info = info;
+    }
+
+    public static Product getPlaceholder() {
+        return placeholder;
+    }
 
     public String getName() {
         return name;

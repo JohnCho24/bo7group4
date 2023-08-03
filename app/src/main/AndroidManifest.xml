@@ -45,10 +45,10 @@
             android:name=".LoginShopper"
             android:exported="false" />
         <activity
-            android:name=".OwnerInventory"
+            android:name=".owner_inventory.OwnerInventory"
             android:exported="false" />
         <activity
-            android:name=".CreateProduct"
+            android:name=".owner_inventory.CreateProduct"
             android:exported="false" />
     </application>
 

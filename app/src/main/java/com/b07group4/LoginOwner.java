@@ -70,9 +70,11 @@ public class LoginOwner extends AppCompatActivity {
                         userText.setText("");
                         userPass.setText("");
 
+                        String storeName = dataSnapshot.child("store_name").getValue(String.class);
                         // Redirect to the Shop activity and pass the owner's name
                         Intent intent = new Intent(LoginOwner.this, Shop.class);
                         intent.putExtra("OWNER_NAME", username); // Pass the owner's name to the next activity
+                        intent.putExtra("STORE_NAME", storeName);
                         startActivity(intent);
 
                     } else {

@@ -1,4 +1,4 @@
-package com.b07group4;
+package com.b07group4.owner_inventory;
 
 import static java.lang.Double.parseDouble;
 
@@ -11,6 +11,7 @@ import android.widget.EditText;
 
 import com.b07group4.DBHandler.ProductManager;
 import com.b07group4.DataModels.Product;
+import com.b07group4.R;
 
 public class CreateProduct extends AppCompatActivity {
 
@@ -42,6 +43,7 @@ public class CreateProduct extends AppCompatActivity {
 
         try {
             p = pm.Create(p);
+            // TODO redirect to OwnerInventory
             Log.d("DBG", "Created product: " + p.getId());
         } catch (Exception e) {
             Log.d("DBG", "Something went wrong when creating product: " + e.getMessage());

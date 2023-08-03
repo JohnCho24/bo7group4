@@ -31,4 +31,8 @@
     <string name="brand">Brand</string>
     <string name="price">Price</string>
     <string name="info">Info</string>
+    <string name="delete">Delete</string>
+    <string name="edit">Edit</string>
+    <string name="add">Add</string>
+    <string name="inventory">Inventory</string>
 </resources>
