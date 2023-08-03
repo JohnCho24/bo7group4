@@ -2,12 +2,17 @@ package com.b07group4.DBHandler;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import com.b07group4.DataModels.Product;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +32,31 @@ public class ProductManager {
 
     public interface DBListener<T> {
         void OnData(T data);
+    }
+
+    public void AddValueEventListener(DBListener<List<Product>> listener) {
+        db.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<Product> list = new ArrayList<>();
+                if (snapshot.exists()) {
+                    snapshot
+                            .getChildren()
+                            .forEach(d -> {
+                                Product p = d.getValue(Product.class);
+                                if (d.exists()) p.setId(d.getKey());
+                                list.add(p);
+                            });
+                    Log.d("DBG", "Hello world");
+                    listener.OnData(list);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d("DBG", "Error while doing stuff with Products on FB: " + error.getDetails());
+            }
+        });
     }
 
     public void Get(String id, DBListener<Product> listener) {

@@ -63,14 +63,17 @@ public class OwnerInventory extends AppCompatActivity {
         productsView.setLayoutManager(new LinearLayoutManager(this));
         ((TextView)findViewById(R.id.store_name)).setText(storeName);
 
-        pm.GetAll(l -> {
+        ProductManager.DBListener<List<Product>> myAmazingCode = l -> {
             products.clear();
             l.forEach(p -> {
                 if (p.getOwner_id().equals(username))
                     products.add(p);
             });
             adapter.notifyDataSetChanged();
-        });
+        };
+
+        pm.GetAll(myAmazingCode);
+        pm.AddValueEventListener(myAmazingCode);
     }
 
     public void onClickAdd(View v) {
