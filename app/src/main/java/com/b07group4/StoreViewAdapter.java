@@ -50,9 +50,9 @@ public class StoreViewAdapter extends RecyclerView.Adapter<StoreViewAdapter.Stor
     public class StoreViewHolder extends RecyclerView.ViewHolder {
         TextView textViewStoreName;
 
-        public StoreViewHolder(@NonNull View itemView) {
-            super(itemView);
-            textViewStoreName = itemView.findViewById(R.id.textViewStoreName);
+        public StoreViewHolder(@NonNull View view) {
+            super(view);
+            textViewStoreName = view.findViewById(R.id.textViewStoreName);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+
 import com.b07group4.DataModels.Store;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -36,7 +37,7 @@ public class ShopperPage extends AppCompatActivity {
         String currentUser = preferences.getString("currentUser", "");
         //Log.d("user", currentUser);
         recyclerViewStores = findViewById(R.id.recyclerViewStores);
-        recyclerViewStores.setLayoutManager(new GridLayoutManager(this,1));
+        recyclerViewStores.setLayoutManager(new GridLayoutManager(this, 1));
         ownersRef = FirebaseDatabase.getInstance().getReference("Owners");
         storeList = new ArrayList<>();
         storeViewAdapter = new StoreViewAdapter(storeList);
@@ -62,6 +63,7 @@ public class ShopperPage extends AppCompatActivity {
             }
 
         });
+
         storeViewAdapter.setOnItemClickListener(new StoreViewAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {

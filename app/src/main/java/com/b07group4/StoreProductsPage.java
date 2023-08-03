@@ -4,10 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import androidx.appcompat.app.ActionBar;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
+import androidx.appcompat.widget.Toolbar;
+
 
 import com.b07group4.DataModels.Product;
 import com.google.firebase.database.DataSnapshot;
@@ -33,6 +39,14 @@ public class StoreProductsPage extends AppCompatActivity {
         SharedPreferences preferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
         String currentUser = preferences.getString("currentUser", "");
         String storeName = getIntent().getStringExtra("storeName");
+        TextView textViewStoreName = findViewById(R.id.textViewStoreName);
+        textViewStoreName.setText(storeName);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
         //Log.d("StoreProductsPage", "Store Name: " + storeName);
         productsRef = FirebaseDatabase.getInstance().getReference("Products");
         recyclerViewProducts = findViewById(R.id.recyclerViewProducts);
@@ -40,7 +54,7 @@ public class StoreProductsPage extends AppCompatActivity {
         productList = new ArrayList<>();
         productAdapter = new ProductViewAdapter(productList);
         recyclerViewProducts.setAdapter(productAdapter);
-        productsRef.orderByChild("storeId").equalTo(storeName).addListenerForSingleValueEvent(new ValueEventListener() {
+        productsRef.orderByChild("owner_id").equalTo(storeName).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 productList.clear();
@@ -58,5 +72,12 @@ public class StoreProductsPage extends AppCompatActivity {
                 Toast.makeText(StoreProductsPage.this, "Failed to retrieve products.", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+
+    public boolean onOptionsItemSelected(MenuItem item){
+        Intent intent = new Intent(getApplicationContext(), ShopperPage.class);
+        startActivity(intent);
+        return true;
     }
 }
