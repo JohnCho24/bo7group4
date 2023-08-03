@@ -12,7 +12,7 @@ public class Product {
     public Product() {
     }
 
-    private Product(String name, String brand, double price, String info) {
+    public Product(String name, String brand, double price, String info) {
         this.name = name;
         this.brand = brand;
         this.price = price;

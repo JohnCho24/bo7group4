@@ -48,5 +48,7 @@ public class CreateProduct extends AppCompatActivity {
         } catch (Exception e) {
             Log.d("DBG", "Something went wrong when creating product: " + e.getMessage());
         }
+
+        finish();
     }
 }

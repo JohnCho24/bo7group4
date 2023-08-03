@@ -39,4 +39,5 @@
     <string name="addToCart">Add to Cart</string>
     <string name="your_cart">Your Cart</string>
     <string name="shopper_page">Shopper Page</string>
+    <string name="edit_product">Edit product</string>
 </resources>
