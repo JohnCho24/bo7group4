@@ -43,7 +43,7 @@ public class OrderListAdapter extends ArrayAdapter<Order> {
 
         orderIdTextView.setText("Order ID: " + currentOrder.getOrderId());
         shopperIdTextView.setText("Shopper ID: " + currentOrder.getShopperId());
-        statusTextView.setText("Status: " + currentOrder.getStatus());
+        statusTextView.setText("Status: " + currentOrder.getOrderStatus());
         //totalAmountTextView.setText("Total Amount: " + currentOrder.getTotalAmount());
 
         return listItemView;

@@ -1,19 +1,15 @@
 package com.b07group4;
 
 public class Order {
+    private String orderId;
+    private String orderStatus;
+    private String shopperId;
+    private String storeId;
 
-    String orderId;
-    String shopperId;
-    String status;
-    String storeId;
-
-    public Order(String orderId, String shopperId, String status, String storeId) {
-        this.orderId = orderId;
-        this.shopperId = shopperId;
-        this.status = status;
-        this.storeId = storeId;
+    public Order() {
     }
 
+    // Getters and setters for each field
     public String getOrderId() {
         return orderId;
     }
@@ -22,20 +18,20 @@ public class Order {
         this.orderId = orderId;
     }
 
+    public String getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(String orderStatus) {
+        this.orderStatus = orderStatus;
+    }
+
     public String getShopperId() {
         return shopperId;
     }
 
     public void setShopperId(String shopperId) {
         this.shopperId = shopperId;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 
     public String getStoreId() {

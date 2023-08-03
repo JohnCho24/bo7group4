@@ -1,71 +1,110 @@
 package com.b07group4;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
+import android.widget.ArrayAdapter;
+import android.view.View;
+import android.view.LayoutInflater;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.b07group4.DataModels.Order;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 public class OwnersOrders extends AppCompatActivity {
-    DatabaseReference databaseReference;
-    ListView listView;
-    List<Order> orderList;
+
+    private ListView ordersListView;
+    private ArrayAdapter<Order> ordersAdapter;
+    private DatabaseReference ordersReference;
+    private List<Order> orderList;
+
+    private String STORE = "gucci";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_owners_orders);
 
-        // Listview
-        ListView resultsListView = (ListView) findViewById(R.id.listViewOrders);
+        ordersListView = findViewById(R.id.listViewOrders);
+        orderList = new ArrayList<>();
+        ordersAdapter = new OrderListAdapter(this, orderList);
+        ordersListView.setAdapter(ordersAdapter);
 
-        HashMap<String, String> nameAddresses = new HashMap<>();
-        nameAddresses.put("anotherOrder", "Completed");
-        nameAddresses.put("newOrder1", "In progress");
-//        nameAddresses.put("Rich Homie Quan", "111 Everything Gold Way");
-//        nameAddresses.put("Donna", "789 Escort St");
-//        nameAddresses.put("Bartholomew", "332 Dunkin St");
-//        nameAddresses.put("Eden", "421 Angelic Blvd");
-//        nameAddresses.put("wer", "421 Angelic Blvd");
-//        nameAddresses.put("rfs", "421 Angelic Blvd");
-//        nameAddresses.put("vfdg", "421 Angelic Blvd");
+        ordersReference = FirebaseDatabase.getInstance().getReference("Orders");
 
-        List<HashMap<String, String>> listItems = new ArrayList<>();
-        SimpleAdapter adapter = new SimpleAdapter(this, listItems, R.layout.list_item_order,
-                new String[]{"First Line", "Second Line"},
-                new int[]{R.id.textViewOrderId, R.id.textViewStatus});
+        ordersReference.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                Order order = snapshot.getValue(Order.class);
+                if (order != null && STORE.equals(order.getStoreId())) {
+                    orderList.add(order);
+                    ordersAdapter.notifyDataSetChanged();
+                }
+            }
 
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+            }
 
-        Iterator it = nameAddresses.entrySet().iterator();
-        while (it.hasNext())
-        {
-            HashMap<String, String> resultsMap = new HashMap<>();
-            Map.Entry pair = (Map.Entry)it.next();
-            resultsMap.put("First Line", pair.getKey().toString());
-            resultsMap.put("Second Line", pair.getValue().toString());
-            listItems.add(resultsMap);
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+    }
+
+    // Custom ArrayAdapter for displaying Order items in the ListView
+    private class OrderListAdapter extends ArrayAdapter<Order> {
+        private LayoutInflater inflater;
+
+        public OrderListAdapter(Context context, List<Order> orderList) {
+            super(context, 0, orderList);
+            inflater = LayoutInflater.from(context);
         }
 
-        resultsListView.setAdapter(adapter);
+        @NonNull
+        @Override
+        public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+            View listItemView = convertView;
+            if (listItemView == null) {
+                listItemView = inflater.inflate(R.layout.list_item_order, parent, false);
+            }
 
+            Order currentOrder = getItem(position);
+
+            TextView orderIdTextView = listItemView.findViewById(R.id.textViewOrderId);
+            TextView orderStatusTextView = listItemView.findViewById(R.id.textViewStatus);
+            TextView shopperIdTextView = listItemView.findViewById(R.id.textViewShopperId);
+
+            orderIdTextView.setText("Order ID: " + currentOrder.getOrderId());
+            orderStatusTextView.setText("Status: " + currentOrder.getOrderStatus());
+            shopperIdTextView.setText("Shopper ID: " + currentOrder.getShopperId());
+
+            return listItemView;
+        }
+    }
+
+    public void onClickBack(View view){
+        Intent intent = new Intent(this, Shop.class);
+        startActivity(intent);
     }
 }
+
+
