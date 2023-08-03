@@ -37,4 +37,6 @@
     <string name="inventory">Inventory</string>
     <string name="ShopperPage">Welcome to Javan\'s Mall </string>
     <string name="addToCart">Add to Cart</string>
+    <string name="your_cart">Your Cart</string>
+    <string name="shopper_page">Shopper Page</string>
 </resources>

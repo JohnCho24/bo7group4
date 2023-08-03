@@ -21,6 +21,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import android.os.Bundle;
+import android.view.View;
 
 public class ShopperPage extends AppCompatActivity {
 
@@ -74,5 +76,9 @@ public class ShopperPage extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+    public void clickCart(View view){
+        Intent intent = new Intent(this, ShopperCart.class);
+        startActivity(intent);
     }
 }
