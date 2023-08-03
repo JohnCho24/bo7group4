@@ -62,38 +62,44 @@ public class RegisterShopper extends AppCompatActivity {
         DatabaseReference query = ref.child("Shoppers").child(username);
 
         query.addValueEventListener(new ValueEventListener() {
+            private boolean isAccountCreated = false;
 
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-                if(!snapshot.exists())
-                {
-                    // Blank
-                    userText.setText("");
-                    userPass.setText("");
 
-                    //
-                    //Shopper newShopper = new Shopper(username, password);
+                // Check if account is not created yet
+                if (!isAccountCreated) {
 
-                    // Store
-                    ref.child("Shoppers").child(username).child("password").setValue(password);
+                    // Account doesn't exist yet
+                    if (!snapshot.exists()) {
+                        // Blank
+                        userText.setText("");
+                        userPass.setText("");
 
-                    // Account created message
-                    Toast.makeText(RegisterShopper.this, "Account created", Toast.LENGTH_SHORT).show();
+                        // Store
+                        ref.child("Shoppers").child(username).child("password").setValue(password);
 
-                    // Go to next screen
-                    Intent intent = new Intent(RegisterShopper.this, LoginShopper.class);
-                    startActivity(intent);
-                }
+                        // Account created message
+                        Toast.makeText(RegisterShopper.this, "Account created", Toast.LENGTH_SHORT).show();
 
-                // Account already exists
-                else{
-                    Toast.makeText(RegisterShopper.this, "User already exists.", Toast.LENGTH_SHORT).show();
+                        // Go to next screen
+                        Intent intent = new Intent(RegisterShopper.this, LoginShopper.class);
+                        startActivity(intent);
+
+                        // Set the flag to true to indicate account creation
+                        isAccountCreated = true;
+                    }
+                    // Account already exists
+                    else {
+                        // Account already exists
+                        Toast.makeText(RegisterShopper.this, "User already exists.", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
-
             @Override
             public void onCancelled(DatabaseError error) {
             }
+
         });
     }
 }
