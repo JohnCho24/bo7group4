@@ -57,6 +57,7 @@ public class OwnerInventory extends AppCompatActivity {
 
         adapter.setOnDelete(pos -> {
             Log.d("DBG", "Deleteing item at position: " + pos);
+            pm.Delete(products.get(pos).getId());
         });
 
         productsView.setAdapter(adapter);
