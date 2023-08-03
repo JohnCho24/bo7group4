@@ -2,10 +2,7 @@ package com.b07group4.DBHandler;
 
 import android.util.Log;
 
-import androidx.annotation.NonNull;
-
 import com.b07group4.DataModels.Product;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.database.DataSnapshot;
@@ -13,7 +10,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 public class ProductManager {
     static private ProductManager instance_;
@@ -30,7 +26,7 @@ public class ProductManager {
     }
 
     public interface DBListener<T> {
-        void OnData(T l);
+        void OnData(T data);
     }
 
     public void Get(String id, DBListener<Product> listener) {
@@ -47,18 +43,24 @@ public class ProductManager {
     public void GetAll(DBListener<List<Product>> listener) {
         List<Product> productList = new ArrayList<>();
 
-        db.get().addOnCompleteListener(task -> {
-            if (!task.isSuccessful()) {
+        Task<DataSnapshot> t = db.get();
+        if (listener != null)
+            t.addOnCompleteListener(task -> {
+                if (!task.isSuccessful()) {
+                    listener.OnData(productList);
+                    return;
+                }
+
+                task.getResult().getChildren().forEach(d -> {
+                    if (d.exists()) {
+                        Product p = d.getValue(Product.class);
+                        if (p != null) p.setId(d.getKey());
+                        productList.add(p);
+                    }
+                });
+
                 listener.OnData(productList);
-                return;
-            }
-
-            task.getResult().getChildren().forEach(d -> {
-                if (d.exists()) productList.add(d.getValue(Product.class));
             });
-
-            listener.OnData(productList);
-        });
     }
 
     public Product Create(Product product) {
@@ -68,9 +70,26 @@ public class ProductManager {
         return product;
     }
 
-    public Product Update(String id, Product data) {
-        db.child(id).setValue(data);
-        return data;
+    public void Update(String id, Product data, DBListener<Product> listener) {
+
+        if (id == null)
+            return;
+
+        List<Task<Void>> tasks = new ArrayList<>();
+        tasks.add(db.child(id).child("name").setValue(data.getName()));
+        tasks.add(db.child(id).child("brand").setValue(data.getBrand()));
+        tasks.add(db.child(id).child("price").setValue(data.getPrice()));
+        tasks.add(db.child(id).child("info").setValue(data.getInfo()));
+
+        if (listener != null)
+            Tasks.whenAll(tasks).addOnCompleteListener(task -> {
+                if (!task.isSuccessful()) {
+                    listener.OnData(null);
+                    return;
+                }
+
+                listener.OnData(data);
+            });
     }
 
     public void Delete(String id) {

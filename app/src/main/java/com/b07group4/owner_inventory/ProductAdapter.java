@@ -1,6 +1,7 @@
 package com.b07group4.owner_inventory;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,15 +20,28 @@ import java.util.List;
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
     private List<Product> products;
 
+    private OnClickListener onEdit, onDelete;
+
+    public interface OnClickListener {
+        void onClick(int pos);
+    }
     public ProductAdapter(List<Product> l) {
         products = l;
     }
 
+    public void setOnEdit(OnClickListener onEdit) {
+        this.onEdit = onEdit;
+    }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public void setOnDelete(OnClickListener onDelete) {
+        this.onDelete = onDelete;
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
         private final TextView name, brand, price, info;
         private final Button editBtn, deleteBtn;
+
         public ViewHolder(View view) {
             super(view);
 
@@ -37,6 +51,22 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             info = view.findViewById(R.id.info);
             editBtn = view.findViewById(R.id.editBtn);
             deleteBtn = view.findViewById(R.id.deleteBtn);
+
+            editBtn.setOnClickListener(v -> {
+                if (onEdit != null) {
+                    int pos = getAdapterPosition();
+                    if (pos != RecyclerView.NO_POSITION)
+                        onEdit.onClick(pos);
+                }
+            });
+
+            deleteBtn.setOnClickListener(v -> {
+                if (onDelete != null) {
+                    int pos = getAdapterPosition();
+                    if (pos != RecyclerView.NO_POSITION)
+                        onDelete.onClick(pos);
+                }
+            });
         }
 
         public TextView getName() {
@@ -79,6 +109,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         holder.getBrand().setText(products.get(position).getBrand());
         holder.getPrice().setText(String.valueOf(products.get(position).getPrice()));
         holder.getInfo().setText(products.get(position).getInfo());
+
+
     }
 
     @Override
