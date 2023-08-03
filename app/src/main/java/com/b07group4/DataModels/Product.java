@@ -1,22 +1,26 @@
 package com.b07group4.DataModels;
 
 public class Product {
-    public String name;
-    public double price;
-    public String brand;
-    public String info;
-    public int quantity;
-    public String id;
-    public String image;
+    private String name;
+    private double price;
+    private String brand;
+    private String info;
+    private String id;
+    private String owner_id;
+    private static final Product placeholder = new Product("Hello", "World", 12.34, "Java is bad!");
 
-    public Product(String n, double p, String b, String in, int q, String id, String im) {
-        this.name = n;
-        this.price = p;
-        this.brand = b;
-        this.info = in;
-        this.quantity = q;
-        this.id = id;
-        this.image = im;
+    public Product() {
+    }
+
+    public Product(String name, String brand, double price, String info) {
+        this.name = name;
+        this.brand = brand;
+        this.price = price;
+        this.info = info;
+    }
+
+    public static Product getPlaceholder() {
+        return placeholder;
     }
 
     public String getName() {
@@ -35,14 +39,6 @@ public class Product {
         this.price = price;
     }
 
-    public String getBrand() {
-        return brand;
-    }
-
-    public void setBrand(String brand) {
-        this.brand = brand;
-    }
-
     public String getInfo() {
         return info;
     }
@@ -51,12 +47,12 @@ public class Product {
         this.info = info;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public String getBrand() {
+        return brand;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setBrand(String brand) {
+        this.brand = brand;
     }
 
     public String getId() {
@@ -67,11 +63,11 @@ public class Product {
         this.id = id;
     }
 
-    public String getImage() {
-        return image;
+    public String getOwner_id() {
+        return owner_id;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setOwner_id(String owner_id) {
+        this.owner_id = owner_id;
     }
 }

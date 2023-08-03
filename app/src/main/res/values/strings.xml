@@ -26,4 +26,15 @@
     <string name="click_to_login">Click to login!</string>
     <string name="click_to_register">Click to register!</string>
     <string name="logout">Logout</string>
+    <string name="add_product">Add product</string>
+    <string name="name">Name</string>
+    <string name="brand">Brand</string>
+    <string name="price">Price</string>
+    <string name="info">Info</string>
+    <string name="delete">Delete</string>
+    <string name="edit">Edit</string>
+    <string name="add">Add</string>
+    <string name="inventory">Inventory</string>
+    <string name="ShopperPage">Welcome to Javan\'s Mall </string>
+    <string name="edit_product">Edit product</string>
 </resources>
