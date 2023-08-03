@@ -8,6 +8,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.b07group4.DataModels.Product;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,7 +37,7 @@ public class CartProductAdapter extends RecyclerView.Adapter<CartProductAdapter.
     @Override
     public void onBindViewHolder(@NonNull CartProductViewHolder holder, int position) {
         Product product = productList.get(position);
-        holder.productIdTextView.setText(product.getProductId());
+        holder.productIdTextView.setText(product.getName());
         holder.priceTextView.setText(String.valueOf(product.getPrice()));
     }
 

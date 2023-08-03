@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.b07group4.DataModels.Product;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -100,7 +101,7 @@ public class ShopperCart extends AppCompatActivity {
             filteredList.addAll(productList);
         } else {
             for (Product product : productList) {
-                if (product.getProductId().toLowerCase().contains(query.toLowerCase())) {
+                if (product.getName().toLowerCase().contains(query.toLowerCase())) {
                     filteredList.add(product);
                 }
             }
