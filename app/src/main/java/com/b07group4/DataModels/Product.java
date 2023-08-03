@@ -1,7 +1,5 @@
 package com.b07group4.DataModels;
 
-import com.b07group4.DBHandler.ProductManager;
-
 public class Product {
     private String name;
     private double price;
@@ -11,7 +9,9 @@ public class Product {
     private String owner_id;
     private static final Product placeholder = new Product("Hello", "World", 12.34, "Java is bad!");
 
-    public Product() {}
+    public Product() {
+    }
+
     private Product(String name, String brand, double price, String info) {
         this.name = name;
         this.brand = brand;
@@ -39,20 +39,20 @@ public class Product {
         this.price = price;
     }
 
-    public String getBrand() {
-        return brand;
-    }
-
-    public void setBrand(String brand) {
-        this.brand = brand;
-    }
-
     public String getInfo() {
         return info;
     }
 
     public void setInfo(String info) {
         this.info = info;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
     }
 
     public String getId() {

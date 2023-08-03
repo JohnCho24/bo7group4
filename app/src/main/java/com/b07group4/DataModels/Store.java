@@ -8,6 +8,10 @@ public class Store {
     private String storeName;
     private List<Product> products;
 
+    public Store(String storeName){
+        this.storeName = storeName;
+    }
+
     public Store(String storeName, List<Product> products) {
         this.storeName = storeName;
         this.products = products;
