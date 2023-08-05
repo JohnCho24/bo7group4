@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.b07group4.DBHandler.ProductManager;
 import com.b07group4.DataModels.Product;
@@ -46,5 +47,7 @@ public class EditProduct extends AppCompatActivity {
                 info.getText().toString()),
                 null);
         finish();
+        Toast.makeText(this, "Item edited", Toast.LENGTH_SHORT).show();
+
     }
 }

@@ -23,21 +23,23 @@
         android:id="@+id/productList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        app2:layout_constraintBottom_toBottomOf="parent"
         app2:layout_constraintEnd_toEndOf="parent"
+        app2:layout_constraintHorizontal_bias="0.498"
         app2:layout_constraintStart_toStartOf="parent"
-        app2:layout_constraintTop_toBottomOf="@+id/addBtn" />
+        app2:layout_constraintTop_toBottomOf="@+id/textView5" />
 
     <Button
         android:id="@+id/addBtn"
-        android:layout_width="wrap_content"
+        android:layout_width="140sp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="88dp"
         android:onClick="onClickAdd"
-        android:text="@string/add"
+        android:text="@string/add_product"
         app2:layout_constraintEnd_toEndOf="parent"
+        app2:layout_constraintHorizontal_bias="0.863"
         app2:layout_constraintStart_toStartOf="parent"
-        app2:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app2:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView5"
@@ -49,5 +51,17 @@
         app2:layout_constraintHorizontal_bias="0.498"
         app2:layout_constraintStart_toStartOf="parent"
         app2:layout_constraintTop_toBottomOf="@+id/store_name" />
+
+    <Button
+        android:id="@+id/inventoryToShopBack"
+        android:layout_width="140sp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="88dp"
+        android:onClick="onClickBack"
+        android:text="@string/back"
+        app2:layout_constraintEnd_toEndOf="parent"
+        app2:layout_constraintHorizontal_bias="0.166"
+        app2:layout_constraintStart_toStartOf="parent"
+        app2:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,19 +6,14 @@ import java.util.List;
 
 public class Order {
     private String orderId;
+    private String orderStatus;
     private String shopperId;
-    private String status;
-    private List<Item> items;
+    private String storeId;
+
     public Order() {
-
     }
 
-    public Order(String orderId, String shopperId, String status, double totalAmount, List<Item> items) {
-        this.orderId = orderId;
-        this.shopperId = shopperId;
-        this.status = status;
-        this.items = items;
-    }
+    // Getters and setters for each field
     public String getOrderId() {
         return orderId;
     }
@@ -27,28 +22,27 @@ public class Order {
         this.orderId = orderId;
     }
 
+    public String getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(String orderStatus) {
+        this.orderStatus = orderStatus;
+    }
+
     public String getShopperId() {
         return shopperId;
     }
 
-    public void setShopperId(String customerId) {
-        this.shopperId = customerId;
+    public void setShopperId(String shopperId) {
+        this.shopperId = shopperId;
     }
 
-
-    public String getStatus() {
-        return status;
+    public String getStoreId() {
+        return storeId;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public List<Item> getItems() {
-        return items;
-    }
-
-    public void setItems(List<Item> items) {
-        this.items = items;
+    public void setStoreId(String storeId) {
+        this.storeId = storeId;
     }
 }
