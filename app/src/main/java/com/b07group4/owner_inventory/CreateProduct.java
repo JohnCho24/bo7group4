@@ -65,11 +65,6 @@ public class CreateProduct extends AppCompatActivity {
             // Added to inventory success toast message
             Toast.makeText(this, "Item added successfully!", Toast.LENGTH_SHORT).show();
 
-            // Redirect to OwnerInventory
-            Intent intent = new Intent(this, OwnerInventory.class);
-            intent.putExtra("OWNER_NAME", owner_id);
-            intent.putExtra("STORE_NAME", storeName);
-            startActivity(intent);
         }
 
         catch (Exception e) {
@@ -81,9 +76,6 @@ public class CreateProduct extends AppCompatActivity {
 
     //
     public void onClickBack(View view){
-        Intent intent = new Intent(this, OwnerInventory.class);
-        intent.putExtra("OWNER_NAME", owner_id);
-        intent.putExtra("STORE_NAME", storeName);
-        startActivity(intent);
+        finish();
     }
 }

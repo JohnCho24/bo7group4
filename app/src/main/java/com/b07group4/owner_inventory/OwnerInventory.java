@@ -88,9 +88,6 @@ public class OwnerInventory extends AppCompatActivity {
     }
 
     public void onClickBack(View view){
-        Intent intent = new Intent(this, Shop.class);
-        intent.putExtra("OWNER_NAME", username);
-        intent.putExtra("STORE_NAME", storeName);
-        startActivity(intent);
+        finish();
     }
 }

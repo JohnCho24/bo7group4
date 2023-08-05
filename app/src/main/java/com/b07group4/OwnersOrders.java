@@ -38,14 +38,12 @@ public class OwnersOrders extends AppCompatActivity {
         // get from intent extra
         username = getIntent().getStringExtra("OWNER_NAME");
         storeName = getIntent().getStringExtra("STORE_NAME");
-        
+
+
     }
 
     public void onClickBack(View view){
-        Intent intent = new Intent(this, Shop.class);
-        intent.putExtra("OWNER_NAME", username);
-        intent.putExtra("STORE_NAME", storeName);
-        startActivity(intent);
+        finish();
     }
 }
 
