@@ -31,28 +31,8 @@ public class Shop extends AppCompatActivity {
         ownerName = getIntent().getStringExtra("OWNER_NAME");
         storeName = getIntent().getStringExtra("STORE_NAME");
 
-        // Query the database to fetch the store ID based on the owner's name
-        DatabaseReference ownersRef = FirebaseDatabase.getInstance().getReference("Owners");
-        ownersRef.child(ownerName).child("store_name").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    // Store ID found, set it to the textViewStore
-                    String storeId = dataSnapshot.getValue(String.class);
-                    textViewStore.setText(storeId + " shop home page");
-                }
+        textViewStore.setText(storeName + " shop home page");
 
-                else {
-                    // Owner or store not found, handle the case
-                    textViewStore.setText("Store not found");
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                textViewStore.setText("Error fetching store ID");
-            }
-        });
     }
 
     // Button to go to orders page

@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="88dp"
         android:onClick="onClickAdd"
-        android:text="@string/add"
+        android:text="@string/add_product"
         app2:layout_constraintEnd_toEndOf="parent"
         app2:layout_constraintHorizontal_bias="0.863"
         app2:layout_constraintStart_toStartOf="parent"
