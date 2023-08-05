@@ -40,9 +40,13 @@ public class RegisterOwner extends AppCompatActivity {
     public void onClickSignup(View view){
         DatabaseReference ref = db.getReference();
 
-        // Store username as all lowercase
+        // Store username
         EditText userText = (EditText) findViewById(R.id.registerUsername);
         String username = userText.getText().toString();
+
+        // Store name
+        EditText userStoreName = (EditText) findViewById(R.id.ownerStoreName) ;
+        String storeName = userStoreName.getText().toString();
 
         // Password
         EditText userPass = (EditText) findViewById(R.id.registerPassword);
@@ -55,7 +59,7 @@ public class RegisterOwner extends AppCompatActivity {
         }
 
         // Make sure all fields are filled
-        if(TextUtils.isEmpty(username) || TextUtils.isEmpty(password)){
+        if(TextUtils.isEmpty(username) || TextUtils.isEmpty(password) || TextUtils.isEmpty(storeName)){
             Toast.makeText(RegisterOwner.this, "Please fill in all fields.", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -75,9 +79,12 @@ public class RegisterOwner extends AppCompatActivity {
                         // Blank
                         userText.setText("");
                         userPass.setText("");
+                        userStoreName.setText("");
 
                         // Store
                         ref.child("Owners").child(username).child("password").setValue(password);
+                        ref.child("Owners").child(username).child("store_name").setValue(storeName);
+
 
                         // Account created message
                         Toast.makeText(RegisterOwner.this, "Account created", Toast.LENGTH_SHORT).show();

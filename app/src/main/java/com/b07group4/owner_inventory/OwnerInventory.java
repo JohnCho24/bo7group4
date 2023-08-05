@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -14,6 +15,7 @@ import com.b07group4.DBHandler.DBCallback;
 import com.b07group4.DBHandler.ProductManager;
 import com.b07group4.DataModels.Product;
 import com.b07group4.R;
+import com.b07group4.Shop;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,6 +61,7 @@ public class OwnerInventory extends AppCompatActivity {
         adapter.setOnDelete(pos -> {
             Log.d("DBG", "Deleteing item at position: " + pos);
             pm.Delete(products.get(pos).getId());
+            Toast.makeText(this, "Item deleted", Toast.LENGTH_SHORT).show();
         });
 
         productsView.setAdapter(adapter);
@@ -83,5 +86,9 @@ public class OwnerInventory extends AppCompatActivity {
         intent.putExtra("OWNER_NAME", username);
         intent.putExtra("STORE_NAME", storeName);
         startActivity(intent);
+    }
+
+    public void onClickBack(View view){
+        finish();
     }
 }

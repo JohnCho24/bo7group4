@@ -11,18 +11,15 @@ public class Order {
     };
 
     private String orderId;
+    private String orderStatus;
     private String shopperId;
+    private String storeId;
     private OrderStatus status;
     private List<Product> items;
 
     public Order() {}
 
-    public Order(String orderId, String shopperId, OrderStatus status, double totalAmount, List<Product> items) {
-        this.orderId = orderId;
-        this.shopperId = shopperId;
-        this.status = status;
-        this.items = items;
-    }
+    // Getters and setters for each field
     public String getOrderId() {
         return orderId;
     }
@@ -31,14 +28,21 @@ public class Order {
         this.orderId = orderId;
     }
 
+    public String getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(String orderStatus) {
+        this.orderStatus = orderStatus;
+    }
+
     public String getShopperId() {
         return shopperId;
     }
 
-    public void setShopperId(String customerId) {
-        this.shopperId = customerId;
+    public void setShopperId(String shopperId) {
+        this.shopperId = shopperId;
     }
-
 
     public OrderStatus getStatus() {
         return status;
@@ -54,5 +58,13 @@ public class Order {
 
     public void setItems(List<Product> items) {
         this.items = items;
+    }
+
+    public String getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(String storeId) {
+        this.storeId = storeId;
     }
 }

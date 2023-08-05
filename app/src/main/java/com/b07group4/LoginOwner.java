@@ -64,7 +64,7 @@ public class LoginOwner extends AppCompatActivity {
 
                     // Check if password is correct
                     if (dataSnapshot.child("password").getValue(String.class).equals(password)) {
-                        Toast.makeText(LoginOwner.this, "Login Successful ", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginOwner.this, "Login Successful", Toast.LENGTH_SHORT).show();
 
                         // Blank
                         userText.setText("");
