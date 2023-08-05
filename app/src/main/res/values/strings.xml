@@ -33,7 +33,8 @@
     <string name="info">Info</string>
     <string name="delete">Delete</string>
     <string name="edit">Edit</string>
-    <string name="add">Add</string>
+    <string name="add">Add product</string>
+    <string name="back">Back</string>
     <string name="inventory">Inventory</string>
     <string name="ShopperPage">Welcome to Javan\'s Mall </string>
     <string name="edit_product">Edit product</string>
