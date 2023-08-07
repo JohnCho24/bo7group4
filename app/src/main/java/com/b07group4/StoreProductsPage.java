@@ -62,7 +62,7 @@ public class StoreProductsPage extends AppCompatActivity {
         DBCallback<List<Product>> myAmazingCode = l -> {
             productList.clear();
             l.forEach(p -> {
-                if (p.getOwner_id().equals(currentUser))
+                if (p.getOwner_id().equals(storeName))
                     productList.add(p);
             });
             productAdapter.notifyDataSetChanged();
