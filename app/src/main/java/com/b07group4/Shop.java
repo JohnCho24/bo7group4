@@ -50,4 +50,11 @@ public class Shop extends AppCompatActivity {
         intent.putExtra("STORE_NAME", storeName);
         startActivity(intent);
     }
+
+    // Logout button that goes to home page
+    public void onClickLogout(View v){
+        Intent i = new Intent(this, HomePage.class);
+        startActivity(i);
+    }
+
 }
