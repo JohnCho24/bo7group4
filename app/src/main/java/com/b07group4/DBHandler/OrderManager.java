@@ -1,10 +1,20 @@
 package com.b07group4.DBHandler;
 
+import android.util.Log;
+
+import androidx.annotation.NonNull;
+
 import com.b07group4.DataModels.Order;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class OrderManager {
     private final DatabaseReference db;
@@ -21,15 +31,46 @@ public class OrderManager {
     }
 
     public void Create(Order order, DBCallback<Order> cb) {
-        // TODO
+        String orderId = db.push().getKey();
+        db.child(orderId).setValue(order);
+        order.setOrderId(orderId);
+        cb.OnData(order);
     }
 
     public void GetAll(DBCallback<List<Order>> cb) {
-        // TODO
+        db.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<Order> orderList = new ArrayList<>();
+                if (snapshot.exists()) {
+                    snapshot
+                            .getChildren()
+                            .forEach(d -> {
+                                Order o = d.getValue(Order.class);
+                                if (d.exists()) o.setOrderId(d.getKey());
+                                orderList.add(o);
+                            });
+                    Log.d("DBG", "Successful");
+                    cb.OnData(orderList);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d("DBG", "Error while doing stuff with Orders on FB: " + error.getDetails());
+            }
+        });
     }
 
     public void Get(String id, DBCallback<Order> cb) {
-        // TODO
+        db.child(id).get().addOnCompleteListener(task -> {
+            if (!task.isSuccessful()) {
+                cb.OnData(null);
+                return;
+            }
+
+            cb.OnData(task.getResult().getValue(Order.class));
+        });
     }
 
     public void Update(String id, Order data, DBCallback<Order> cb) {

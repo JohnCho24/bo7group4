@@ -1,6 +1,8 @@
 package com.b07group4.DataModels;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Order {
 
@@ -10,61 +12,35 @@ public class Order {
         DONE
     };
 
-    private String orderId;
-    private String orderStatus;
-    private String shopperId;
-    private String storeId;
-    private OrderStatus status;
-    private List<Product> items;
+        private String orderId;
+        private String shopperId;
+        private Map<String, SubStoreOrder> subStoreOrders;
 
-    public Order() {}
+        public Order() {
+            subStoreOrders = new HashMap<>();
+        }
 
-    // Getters and setters for each field
-    public String getOrderId() {
-        return orderId;
-    }
+        public String getOrderId() {
+            return orderId;
+        }
 
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
-    }
+        public void setOrderId(String orderId) {
+            this.orderId = orderId;
+        }
 
-    public String getOrderStatus() {
-        return orderStatus;
-    }
+        public String getShopperId() {
+            return shopperId;
+        }
 
-    public void setOrderStatus(String orderStatus) {
-        this.orderStatus = orderStatus;
-    }
+        public void setShopperId(String shopperId) {
+            this.shopperId = shopperId;
+        }
 
-    public String getShopperId() {
-        return shopperId;
-    }
+        public Map<String, SubStoreOrder> getSubStoreOrders() {
+            return subStoreOrders;
+        }
 
-    public void setShopperId(String shopperId) {
-        this.shopperId = shopperId;
-    }
-
-    public OrderStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(OrderStatus status) {
-        this.status = status;
-    }
-
-    public List<Product> getItems() {
-        return items;
-    }
-
-    public void setItems(List<Product> items) {
-        this.items = items;
-    }
-
-    public String getStoreId() {
-        return storeId;
-    }
-
-    public void setStoreId(String storeId) {
-        this.storeId = storeId;
-    }
+        public void setSubStoreOrder(String storeName, SubStoreOrder subStoreOrder) {
+            subStoreOrders.put(storeName, subStoreOrder);
+        }
 }
