@@ -52,6 +52,7 @@ public class CartManager {
 
         for (Product product : myCart) {
             String ownerId = product.getOwner_id();
+            Log.d("DBG", ownerId);
             if (!subStoreOrders.containsKey(ownerId)) {
                 subStoreOrders.put(ownerId, new ArrayList<>());
             }

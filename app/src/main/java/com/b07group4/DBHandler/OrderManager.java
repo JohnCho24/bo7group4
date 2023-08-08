@@ -29,6 +29,28 @@ public class OrderManager {
             instance_ = new OrderManager();
         return instance_;
     }
+    public void AddValueEventListener(DBCallback<List<Order>> listener) {
+        db.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<Order> orderList = new ArrayList<>();
+                if (snapshot.exists()) {
+                    snapshot.getChildren().forEach(d -> {
+                        Order order = d.getValue(Order.class);
+                        if (d.exists()) order.setOrderId(d.getKey());
+                        orderList.add(order);
+                    });
+                    Log.d("DBG", "Hello order");
+                    listener.OnData(orderList);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d("DBG", "Error while doing stuff with Orders on FB: " + error.getDetails());
+            }
+        });
+    }
 
     public void Create(Order order, DBCallback<Order> cb) {
         String orderId = db.push().getKey();
