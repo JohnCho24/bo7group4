@@ -18,18 +18,18 @@
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <Button
         android:id="@+id/storeToShopBack"
-        android:layout_width="92dp"
+        android:layout_width="83dp"
         android:layout_height="48dp"
-        android:layout_marginTop="628dp"
+        android:layout_marginTop="16dp"
         android:onClick="onClickBack"
         android:text="@string/back"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintHorizontal_bias="0.048"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewProducts"
