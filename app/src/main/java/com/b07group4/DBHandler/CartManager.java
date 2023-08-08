@@ -26,6 +26,7 @@ public class CartManager {
         if (instance_ == null)
             instance_ = new CartManager();
 
+        Log.d("DBG", "cart manager called");
         return instance_;
     }
 
@@ -45,7 +46,45 @@ public class CartManager {
     }
 
     public void Checkout(String shopperId) {
+        Log.d("DBG", "Checkout method started");
+
         OrderManager orderManager = OrderManager.getInstance();
+        Map<String, List<Product>> subStoreOrders = new HashMap<>();
+        Order order = new Order();
+        order.setShopperId(shopperId);
+
+        for (Product product : myCart) {
+            String ownerId = product.getOwner_id();
+            Log.d("DBG", "Product owner ID: " + ownerId);
+
+            if (!subStoreOrders.containsKey(ownerId)) {
+                subStoreOrders.put(ownerId, new ArrayList<>());
+            }
+            subStoreOrders.get(ownerId).add(product);
+        }
+
+        for (String storeName : subStoreOrders.keySet()) {
+            List<Product> products = subStoreOrders.get(storeName);
+
+            SubStoreOrder subStoreOrder = new SubStoreOrder();
+            subStoreOrder.setOrderStatus("");
+            subStoreOrder.setProductList(products);
+            order.setSubStoreOrder(storeName, subStoreOrder);
+        }
+
+        orderManager.Create(order, data -> {
+            if (data != null) {
+                String orderId = data.getOrderId();
+                Log.d("DBG", "Order created successfully. Order ID: " + orderId);
+
+                CartManager.getInstance().ClearCart();
+            } else {
+                Log.d("DBG", "Failed to create order.");
+            }
+        });
+
+        Log.d("DBG", "Checkout method completed");
+        /*OrderManager orderManager = OrderManager.getInstance();
         Map<String, List<Product>> subStoreOrders = new HashMap<>();
         Order order = new Order();
         order.setShopperId(shopperId);
@@ -76,6 +115,6 @@ public class CartManager {
             else {
                 Log.d("DBG", "Failed to create order.");
             }
-        });
+        });*/
     }
 }

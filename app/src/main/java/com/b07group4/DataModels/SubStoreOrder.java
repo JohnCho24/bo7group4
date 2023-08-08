@@ -6,6 +6,9 @@ public class SubStoreOrder {
 
     private String orderStatus;
     private List<Product> productList;
+    public SubStoreOrder(){
+
+    }
 
     public String getOrderStatus() {
         return orderStatus;

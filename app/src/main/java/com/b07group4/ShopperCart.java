@@ -6,8 +6,10 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -41,6 +43,7 @@ public class ShopperCart extends AppCompatActivity {
         setContentView(R.layout.activity_shopper_cart);
         SharedPreferences preferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
         currentUser = preferences.getString("currentUser", null);
+        Log.d("DBG",currentUser);
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -62,9 +65,20 @@ public class ShopperCart extends AppCompatActivity {
         }
         tvTotalPrice.setText(String.format(Locale.getDefault(), "%.2f", totalProductPrice));
     }
-    public void clickCheckout(){
-        Log.d("DBG", currentUser);
-        cm.Checkout(currentUser);
+    public void clickCheckout(View view){
+        //Log.d("DBG", "checkout");
+        //cm.Checkout(currentUser);
+        //finish();
+        Log.d("DBG", "clickCheckout method called");
+
+        try {
+            Log.d("DBG", "Before calling cm.Checkout");
+            CartManager.getInstance().Checkout(currentUser);
+            Log.d("DBG", "After calling cm.Checkout");
+        } catch (Exception e) {
+            Log.e("DBG", "Exception in clickCheckout: " + e.getMessage());
+        }
+
         finish();
     }
 
