@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.widget.Toolbar;
@@ -46,12 +47,12 @@ public class StoreProductsPage extends AppCompatActivity {
         String storeName = getIntent().getStringExtra("storeName");
         TextView textViewStoreName = findViewById(R.id.storeName);
         textViewStoreName.setText(storeName);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
+        //Toolbar toolbar = findViewById(R.id.toolbar);
+        //setSupportActionBar(toolbar);
+        //ActionBar actionBar = getSupportActionBar();
+        //if (actionBar != null) {
+            //actionBar.setDisplayHomeAsUpEnabled(true);
+        //}
         pm = ProductManager.getInstance();
         recyclerViewProducts = findViewById(R.id.recyclerViewProducts);
         recyclerViewProducts.setLayoutManager(new LinearLayoutManager(this));
@@ -69,30 +70,8 @@ public class StoreProductsPage extends AppCompatActivity {
         };
         pm.GetAll(myAmazingCode);
         pm.AddValueEventListener(myAmazingCode);
-//        productsRef.orderByChild("owner_id").equalTo(storeName).addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                productList.clear();
-//                for (DataSnapshot productSnapshot : dataSnapshot.getChildren()) {
-//                    Product product = productSnapshot.getValue(Product.class);
-//                    if (product != null) {
-//                        productList.add(product);
-//                    }
-//                }
-//                productAdapter.notifyDataSetChanged();
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//                Toast.makeText(StoreProductsPage.this, "Failed to retrieve products.", Toast.LENGTH_SHORT).show();
-//            }
-//        });
     }
-
-
-    public boolean onOptionsItemSelected(MenuItem item){
-        Intent intent = new Intent(getApplicationContext(), ShopperPage.class);
-        startActivity(intent);
-        return true;
+    public void onClickBack(View view){
+        finish();
     }
 }
