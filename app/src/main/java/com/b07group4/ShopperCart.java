@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.b07group4.DBHandler.CartManager;
 import com.b07group4.DataModels.Product;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,7 +29,7 @@ public class ShopperCart extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private CartProductAdapter productAdapter;
-    private List<Product> productList;
+    private List<Product> myCart;
     private double totalProductPrice = 0.0;
     private TextView tvTotalPrice;
 
@@ -42,8 +43,8 @@ public class ShopperCart extends AppCompatActivity {
 
         tvTotalPrice = findViewById(R.id.tv_total_price);
 
-        productList = new ArrayList<>();
-        productAdapter = new CartProductAdapter(productList);
+        myCart = CartManager.getInstance().getCart();
+        productAdapter = new CartProductAdapter(myCart);
         recyclerView.setAdapter(productAdapter);
 
         // Fetch product data from Firebase Realtime Database
@@ -51,11 +52,11 @@ public class ShopperCart extends AppCompatActivity {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                productList.clear();
+                myCart.clear();
                 totalProductPrice = 0.0; // Reset the total price
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Product product = snapshot.getValue(Product.class);
-                    productList.add(product);
+                    myCart.add(product);
                     totalProductPrice += product.getPrice(); // Calculate total price
                 }
                 productAdapter.notifyDataSetChanged();
@@ -98,9 +99,9 @@ public class ShopperCart extends AppCompatActivity {
     private void filter(String query) {
         List<Product> filteredList = new ArrayList<>();
         if (TextUtils.isEmpty(query)) {
-            filteredList.addAll(productList);
+            filteredList.addAll(myCart);
         } else {
-            for (Product product : productList) {
+            for (Product product : myCart) {
                 if (product.getName().toLowerCase().contains(query.toLowerCase())) {
                     filteredList.add(product);
                 }

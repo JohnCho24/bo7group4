@@ -40,6 +40,9 @@ public class CartManager {
     public void ClearCart(){
         myCart.clear();
     }
+    public List<Product> getCart(){
+        return myCart;
+    }
 
     public void Checkout(String shopperId) {
         OrderManager orderManager = OrderManager.getInstance();
