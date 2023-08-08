@@ -68,12 +68,12 @@ public class CartManager {
         orderManager.Create(order, data -> {
             if (data != null) {
                 String orderId = data.getOrderId();
-                Log.d("OrderManager", "Order created successfully. Order ID: " + orderId);
+                Log.d("DBG", "Order created successfully. Order ID: " + orderId);
 
                 CartManager.getInstance().ClearCart();
             }
             else {
-                Log.d("OrderManager", "Failed to create order.");
+                Log.d("DBG", "Failed to create order.");
             }
         });
     }

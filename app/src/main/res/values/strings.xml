@@ -43,4 +43,5 @@
     <string name="edit_product">Edit product</string>
     <string name="discover">Discover</string>
     <string name="checkout">Checkout</string>
+    <string name="removeFromCart">Delete</string>
 </resources>
