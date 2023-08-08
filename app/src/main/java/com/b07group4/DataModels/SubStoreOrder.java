@@ -5,7 +5,7 @@ import java.util.List;
 public class SubStoreOrder {
 
     private String orderStatus;
-    private List<Product> productList;
+    private String productIdList;
     public SubStoreOrder(){
 
     }
@@ -18,11 +18,11 @@ public class SubStoreOrder {
         this.orderStatus = orderStatus;
     }
 
-    public List<Product> getProductList() {
-        return productList;
+    public String getProductIdList() {
+        return productIdList;
     }
 
-    public void setProductList(List<Product> productList) {
-        this.productList = productList;
+    public void setProductIdList(String productIdList) {
+        this.productIdList = productIdList;
     }
 }

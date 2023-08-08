@@ -1,6 +1,7 @@
 package com.b07group4.DBHandler;
 
 import android.content.Intent;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.b07group4.DataModels.Order;
@@ -49,7 +50,7 @@ public class CartManager {
         Log.d("DBG", "Checkout method started");
 
         OrderManager orderManager = OrderManager.getInstance();
-        Map<String, List<Product>> subStoreOrders = new HashMap<>();
+        Map<String, List<String>> subStoreOrders = new HashMap<>();
         Order order = new Order();
         order.setShopperId(shopperId);
 
@@ -60,15 +61,16 @@ public class CartManager {
             if (!subStoreOrders.containsKey(ownerId)) {
                 subStoreOrders.put(ownerId, new ArrayList<>());
             }
-            subStoreOrders.get(ownerId).add(product);
+            subStoreOrders.get(ownerId).add(product.getId());
         }
 
         for (String storeName : subStoreOrders.keySet()) {
-            List<Product> products = subStoreOrders.get(storeName);
+            List<String> productIds = subStoreOrders.get(storeName);
 
             SubStoreOrder subStoreOrder = new SubStoreOrder();
-            subStoreOrder.setOrderStatus("");
-            subStoreOrder.setProductList(products);
+            String productListString = TextUtils.join(", ", productIds);
+            subStoreOrder.setOrderStatus("IN_PROCESS");
+            subStoreOrder.setProductIdList(productListString);
             order.setSubStoreOrder(storeName, subStoreOrder);
         }
 
