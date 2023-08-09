@@ -31,7 +31,6 @@ import java.util.List;
 
 public class StoreProductsPage extends AppCompatActivity {
     private RecyclerView recyclerViewProducts;
-//    private DatabaseReference productsRef;
     private ProductManager pm;
     private List<Product> productList;
     private ProductViewAdapter productAdapter;
@@ -47,12 +46,6 @@ public class StoreProductsPage extends AppCompatActivity {
         String storeName = getIntent().getStringExtra("storeName");
         TextView textViewStoreName = findViewById(R.id.storeName);
         textViewStoreName.setText(storeName);
-        //Toolbar toolbar = findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
-        //ActionBar actionBar = getSupportActionBar();
-        //if (actionBar != null) {
-            //actionBar.setDisplayHomeAsUpEnabled(true);
-        //}
         pm = ProductManager.getInstance();
         recyclerViewProducts = findViewById(R.id.recyclerViewProducts);
         recyclerViewProducts.setLayoutManager(new LinearLayoutManager(this));

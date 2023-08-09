@@ -47,7 +47,7 @@ public class CartManager {
     }
 
     public void Checkout(String shopperId) {
-        Log.d("DBG", "Checkout method started");
+        //Log.d("DBG", "Checkout method started");
 
         OrderManager orderManager = OrderManager.getInstance();
         Map<String, List<String>> subStoreOrders = new HashMap<>();
@@ -56,7 +56,7 @@ public class CartManager {
 
         for (Product product : myCart) {
             String ownerId = product.getOwner_id();
-            Log.d("DBG", "Product owner ID: " + ownerId);
+            //Log.d("DBG", "Product owner ID: " + ownerId);
 
             if (!subStoreOrders.containsKey(ownerId)) {
                 subStoreOrders.put(ownerId, new ArrayList<>());
@@ -85,38 +85,7 @@ public class CartManager {
             }
         });
 
-        Log.d("DBG", "Checkout method completed");
-        /*OrderManager orderManager = OrderManager.getInstance();
-        Map<String, List<Product>> subStoreOrders = new HashMap<>();
-        Order order = new Order();
-        order.setShopperId(shopperId);
+        //Log.d("DBG", "Checkout method completed");
 
-        for (Product product : myCart) {
-            String ownerId = product.getOwner_id();
-            Log.d("DBG", ownerId);
-            if (!subStoreOrders.containsKey(ownerId)) {
-                subStoreOrders.put(ownerId, new ArrayList<>());
-            }
-            subStoreOrders.get(ownerId).add(product);
-        }
-        for (String storeName : subStoreOrders.keySet()) {
-            List<Product> products = subStoreOrders.get(storeName);
-
-            SubStoreOrder subStoreOrder = new SubStoreOrder();
-            subStoreOrder.setOrderStatus("");
-            subStoreOrder.setProductList(products);
-            order.setSubStoreOrder(storeName, subStoreOrder);
-        }
-        orderManager.Create(order, data -> {
-            if (data != null) {
-                String orderId = data.getOrderId();
-                Log.d("DBG", "Order created successfully. Order ID: " + orderId);
-
-                CartManager.getInstance().ClearCart();
-            }
-            else {
-                Log.d("DBG", "Failed to create order.");
-            }
-        });*/
     }
 }
