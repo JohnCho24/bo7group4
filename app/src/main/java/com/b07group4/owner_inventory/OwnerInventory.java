@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.b07group4.DBHandler.DBCallback;
 import com.b07group4.DBHandler.ProductManager;
 import com.b07group4.DataModels.Product;
 import com.b07group4.R;
@@ -67,7 +68,7 @@ public class OwnerInventory extends AppCompatActivity {
         productsView.setLayoutManager(new LinearLayoutManager(this));
         ((TextView)findViewById(R.id.store_name)).setText(storeName);
 
-        ProductManager.DBListener<List<Product>> myAmazingCode = l -> {
+        DBCallback<List<Product>> myAmazingCode = l -> {
             products.clear();
             l.forEach(p -> {
                 if (p.getOwner_id().equals(username))

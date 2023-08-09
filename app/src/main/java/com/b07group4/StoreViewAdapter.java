@@ -3,21 +3,22 @@ package com.b07group4;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.b07group4.DataModels.Store;
+import com.b07group4.DataModels.Owner;
 
 import java.util.List;
 
 public class StoreViewAdapter extends RecyclerView.Adapter<StoreViewAdapter.StoreViewHolder> {
 
-    private List<Store> storeList;
+    private List<Owner> storeList;
     private OnItemClickListener listener;
 
-    public StoreViewAdapter(List<Store> storeList) {
+    public StoreViewAdapter(List<Owner> storeList) {
         this.storeList = storeList;
     }
 
@@ -38,8 +39,9 @@ public class StoreViewAdapter extends RecyclerView.Adapter<StoreViewAdapter.Stor
 
     @Override
     public void onBindViewHolder(@NonNull StoreViewHolder v, int position) {
-        Store store = storeList.get(position);
-        v.textViewStoreName.setText(store.getStoreName());
+        Owner store = storeList.get(position);
+        v.getStoreName().setText(store.getStoreName());
+        v.getStoreSize().setText(store.getProducts().size() + " Products");
     }
 
     @Override
@@ -48,23 +50,31 @@ public class StoreViewAdapter extends RecyclerView.Adapter<StoreViewAdapter.Stor
     }
 
     public class StoreViewHolder extends RecyclerView.ViewHolder {
-        TextView textViewStoreName;
+        private final TextView storeName, storeSize;
+        private final Button discover;
 
         public StoreViewHolder(@NonNull View view) {
             super(view);
-            textViewStoreName = view.findViewById(R.id.textViewStoreName);
+            storeName = view.findViewById(R.id.storeName);
+            storeSize = view.findViewById(R.id.storeSize);
+            discover = view.findViewById(R.id.discoverBtn);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (listener != null) {
-                        int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION) {
-                            listener.onItemClick(position);
-                        }
+            discover.setOnClickListener(v -> {
+                if (listener != null) {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION) {
+                        listener.onItemClick(position);
                     }
                 }
             });
+        }
+
+        public TextView getStoreName() {
+            return storeName;
+        }
+
+        public TextView getStoreSize() {
+            return storeSize;
         }
     }
 }

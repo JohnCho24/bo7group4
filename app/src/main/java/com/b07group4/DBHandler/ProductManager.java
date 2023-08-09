@@ -30,11 +30,7 @@ public class ProductManager {
         return instance_;
     }
 
-    public interface DBListener<T> {
-        void OnData(T data);
-    }
-
-    public void AddValueEventListener(DBListener<List<Product>> listener) {
+    public void AddValueEventListener(DBCallback<List<Product>> listener) {
         db.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -59,7 +55,7 @@ public class ProductManager {
         });
     }
 
-    public void Get(String id, DBListener<Product> listener) {
+    public void Get(String id, DBCallback<Product> listener) {
         db.get().addOnCompleteListener(task -> {
             if (!task.isSuccessful()) {
                 listener.OnData(null);
@@ -70,7 +66,7 @@ public class ProductManager {
         });
     }
 
-    public void GetAll(DBListener<List<Product>> listener) {
+    public void GetAll(DBCallback<List<Product>> listener) {
         List<Product> productList = new ArrayList<>();
 
         Task<DataSnapshot> t = db.get();
@@ -100,7 +96,7 @@ public class ProductManager {
         return product;
     }
 
-    public void Update(String id, Product data, DBListener<Product> listener) {
+    public void Update(String id, Product data, DBCallback<Product> listener) {
 
         if (id == null)
             return;
