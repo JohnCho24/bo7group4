@@ -18,6 +18,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.List;
 import android.view.View;
+import android.widget.Toast;
 
 public class ShopperPage extends AppCompatActivity {
 
@@ -79,5 +80,10 @@ public class ShopperPage extends AppCompatActivity {
     public void clickCart(View view){
         Intent intent = new Intent(this, ShopperCart.class);
         startActivity(intent);
+    }
+    public void onClickLogout(View v){
+        Intent i = new Intent(this, HomePage.class);
+        Toast.makeText(this, "Logout successful", Toast.LENGTH_SHORT).show();
+        startActivity(i);
     }
 }
