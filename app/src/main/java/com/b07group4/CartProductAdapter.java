@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.b07group4.DBHandler.CartManager;
 import com.b07group4.DataModels.Product;
+import com.b07group4.ShopperCart;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +43,7 @@ public class CartProductAdapter extends RecyclerView.Adapter<CartProductAdapter.
 
         holder.deleteButton.setOnClickListener(v -> {
             CartManager.getInstance().Remove(product);
+            ShopperCart.updateTotalPriceUI();
             notifyDataSetChanged();
         });
     }
