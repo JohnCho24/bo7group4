@@ -12,6 +12,6 @@ public class ShopperDBHandler {
     }
     //Adding a new shopper to the database
     public void addShopper(Shopper shopper) {
-        shoppersRef.child(shopper.getId()).setValue(shopper);
+        shoppersRef.child(shopper.getUsername()).setValue(shopper);
     }
 }

@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.b07group4.DataModels.Shopper;
 import com.b07group4.DataModels.User;
 import com.b07group4.R;
 import com.b07group4.ShopperPage;
@@ -111,37 +112,36 @@ public class LoginPage extends AppCompatActivity implements AuthContract.Login.V
 
     @Override
     public void showLoading() {
-        // TODO
+        Toast.makeText(com.b07group4.auth.shopper.LoginPage.this, "Logging in...", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void hideLoading() {
-        // TODO
     }
 
     @Override
-    public void showSuccess() {
-        // TODO
+    public void onSuccess() {
+        Toast.makeText(com.b07group4.auth.shopper.LoginPage.this, "Login Successful!", Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void hideSuccess() {
-        // TODO
-    }
-
-    @Override
-    public void showFailure() {
-        // TODO
-    }
-
-    @Override
-    public void hideFailure() {
-        // TODO
+    public void onFailure() {
+        Toast.makeText(com.b07group4.auth.shopper.LoginPage.this, "Login Failed!", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public User getUser() {
-        // TODO
-        return null;
+        Shopper s = new Shopper();
+
+        EditText userText = (EditText) findViewById(R.id.shopperUsername);
+        String username = userText.getText().toString();
+
+        EditText userPass = (EditText) findViewById(R.id.shopperPassword);
+        String password = userPass.getText().toString();
+
+        s.setUsername(username);
+        s.setPassword(password);
+
+        return s;
     }
 }
