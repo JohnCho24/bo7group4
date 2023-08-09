@@ -95,12 +95,6 @@ public class OrderManager {
         });
     }
 
-    public void Update(String id, Order data, DBCallback<Order> cb) {
-        // TODO
-    }
 
-    public void Delete(String id, DBCallback<Void> cb) {
-        // TODO
-    }
 }
 
