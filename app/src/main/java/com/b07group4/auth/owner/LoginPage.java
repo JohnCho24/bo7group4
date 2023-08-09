@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.b07group4.DataModels.Owner;
 import com.b07group4.DataModels.User;
 import com.b07group4.R;
 import com.b07group4.Shop;
@@ -102,38 +103,37 @@ public class LoginPage extends AppCompatActivity implements AuthContract.Login.V
 
     @Override
     public void showLoading() {
-        // TODO
+        Toast.makeText(com.b07group4.auth.owner.LoginPage.this, "Logging in...", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void hideLoading() {
-        // TODO
-
     }
 
     @Override
-    public void showSuccess() {
-        // TODO
+    public void onSuccess() {
+        Toast.makeText(com.b07group4.auth.owner.LoginPage.this, "Login Successful!", Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void hideSuccess() {
-        // TODO
+    public void onFailure() {
+        Toast.makeText(com.b07group4.auth.owner.LoginPage.this, "Login failed!", Toast.LENGTH_SHORT).show();
     }
 
-    @Override
-    public void showFailure() {
-        // TODO
-    }
-
-    @Override
-    public void hideFailure() {
-        // TODO
-    }
 
     @Override
     public User getUser() {
-        // TODO
-        return null;
+        Owner o = new Owner();
+
+        EditText userText = (EditText) findViewById(R.id.ownerUsername);
+        String username = userText.getText().toString();
+
+        EditText userPass = (EditText) findViewById(R.id.ownerPassword);
+        String password = userPass.getText().toString();
+
+        o.setUsername(username);
+        o.setPassword(password);
+
+        return o;
     }
 }

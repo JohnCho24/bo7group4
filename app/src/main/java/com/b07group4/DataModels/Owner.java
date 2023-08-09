@@ -3,10 +3,8 @@ package com.b07group4.DataModels;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Owner {
-    String username;
+public class Owner extends User{
     String storeName;
-    String password;
 
     private List<Product> products;
 
@@ -14,19 +12,10 @@ public class Owner {
         products = new ArrayList<>();
     }
 
-    public Owner(String username, String storeName, String password) {
-        this.username = username;
+    public Owner(String username, String password, String storeName) {
+        super(username, password);
         this.storeName = storeName;
-        this.password = password;
         products = new ArrayList<>();
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getStoreName() {
@@ -37,13 +26,6 @@ public class Owner {
         this.storeName = storeName;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     public List<Product> getProducts() {
         return products;

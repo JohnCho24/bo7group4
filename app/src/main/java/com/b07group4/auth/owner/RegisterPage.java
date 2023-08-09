@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.b07group4.DataModels.Owner;
 import com.b07group4.DataModels.User;
 import com.b07group4.R;
 import com.b07group4.auth.AuthContract;
@@ -116,37 +117,41 @@ public class RegisterPage extends AppCompatActivity implements AuthContract.Regi
 
     @Override
     public void showLoading() {
-        // TODO
+        Toast.makeText(com.b07group4.auth.owner.RegisterPage.this, "Registering...", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void hideLoading() {
-        // TODO
     }
 
     @Override
-    public void showSuccess() {
-        // TODO
+    public void onSuccess() {
+        Toast.makeText(com.b07group4.auth.owner.RegisterPage.this, "Registration Successful!", Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void hideSuccess() {
-        // TODO
-    }
+    public void onFailure() {
+        Toast.makeText(com.b07group4.auth.owner.RegisterPage.this, "Registration failed!", Toast.LENGTH_SHORT).show();
 
-    @Override
-    public void showFailure() {
-        // TODO
-    }
-
-    @Override
-    public void hideFailure() {
-        // TODO
     }
 
     @Override
     public User getUser() {
-        // TODO
-        return null;
+        Owner o = new Owner();
+
+        EditText userText = (EditText) findViewById(R.id.registerUsername);
+        String username = userText.getText().toString();
+
+        EditText userPass = (EditText) findViewById(R.id.registerPassword);
+        String password = userPass.getText().toString();
+
+        EditText userStoreName = (EditText) findViewById(R.id.ownerStoreName) ;
+        String storeName = userStoreName.getText().toString();
+
+        o.setUsername(username);
+        o.setPassword(password);
+        o.setStoreName(storeName);
+
+        return o;
     }
 }
