@@ -1,4 +1,4 @@
-package com.b07group4.auth;
+package com.b07group4.auth.owner;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,15 +9,18 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.b07group4.DataModels.User;
 import com.b07group4.R;
 import com.b07group4.Shop;
+import com.b07group4.auth.AuthContract;
+import com.b07group4.auth.home.HomePage;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class LoginOwner extends AppCompatActivity {
+public class LoginPage extends AppCompatActivity implements AuthContract.Login.View {
 
     FirebaseDatabase db;
 
@@ -34,7 +37,7 @@ public class LoginOwner extends AppCompatActivity {
     }
 
     public void clickSignup(View view){
-        Intent intent = new Intent(this, RegisterOwner.class);
+        Intent intent = new Intent(this, RegisterPage.class);
         startActivity(intent);
     }
 
@@ -66,7 +69,7 @@ public class LoginOwner extends AppCompatActivity {
 
                     // Check if password is correct
                     if (dataSnapshot.child("password").getValue(String.class).equals(password)) {
-                        Toast.makeText(LoginOwner.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginPage.this, "Login Successful", Toast.LENGTH_SHORT).show();
 
                         // Blank
                         userText.setText("");
@@ -74,20 +77,20 @@ public class LoginOwner extends AppCompatActivity {
 
                         String storeName = dataSnapshot.child("store_name").getValue(String.class);
                         // Redirect to the Shop activity and pass the owner's name
-                        Intent intent = new Intent(LoginOwner.this, Shop.class);
+                        Intent intent = new Intent(LoginPage.this, Shop.class);
                         intent.putExtra("OWNER_NAME", username); // Pass the owner's name to the next activity
                         intent.putExtra("STORE_NAME", storeName);
                         startActivity(intent);
 
                     } else {
-                        Toast.makeText(LoginOwner.this, "Password Incorrect", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginPage.this, "Password Incorrect", Toast.LENGTH_SHORT).show();
                         userPass.setText("");
                     }
                 }
 
                 // User not found
                 else {
-                    Toast.makeText(LoginOwner.this, "User not found", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginPage.this, "User not found", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -95,5 +98,42 @@ public class LoginOwner extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
             }
         });
+    }
+
+    @Override
+    public void showLoading() {
+        // TODO
+    }
+
+    @Override
+    public void hideLoading() {
+        // TODO
+
+    }
+
+    @Override
+    public void showSuccess() {
+        // TODO
+    }
+
+    @Override
+    public void hideSuccess() {
+        // TODO
+    }
+
+    @Override
+    public void showFailure() {
+        // TODO
+    }
+
+    @Override
+    public void hideFailure() {
+        // TODO
+    }
+
+    @Override
+    public User getUser() {
+        // TODO
+        return null;
     }
 }

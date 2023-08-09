@@ -11,7 +11,7 @@ import android.os.Bundle;
 
 import com.b07group4.DBHandler.ProductManager;
 import com.b07group4.DataModels.Owner;
-import com.b07group4.auth.HomePage;
+import com.b07group4.auth.home.HomePage;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
