@@ -7,6 +7,7 @@ public class HomePresenter implements AuthContract.Home.Presenter {
     @Override
     public void onClickAsOwner() {
         // TODO go to login as owner
+
     }
 
     @Override

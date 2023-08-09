@@ -4,11 +4,10 @@ import com.b07group4.auth.AuthContract;
 
 public class LoginPresenter implements AuthContract.Login.Presenter {
     private AuthContract.Login.View loginPage;
-
-    private AuthContract.Login.Model am;
+    private AuthContract.Login.Model model;
 
     @Override
     public void onClickLogin() {
-        // TODO
+        model.login(loginPage.getUser(), u -> {});
     }
 }
