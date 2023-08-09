@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:gravity="center"
     android:padding="15dp"
-    tools:context=".RegisterOwner">
+    tools:context=".auth.RegisterOwner">
 
     <TextView
         android:text="Owner Registration"

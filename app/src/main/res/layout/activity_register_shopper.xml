@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:gravity="center"
     android:padding="15dp"
-    tools:context=".RegisterShopper">
+    tools:context=".auth.RegisterShopper">
 
     <TextView
         android:text="@string/RegisterShopperHeader"

@@ -1,10 +1,12 @@
-package com.b07group4;
+package com.b07group4.auth;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import com.b07group4.R;
 
 public class HomePage extends AppCompatActivity {
 

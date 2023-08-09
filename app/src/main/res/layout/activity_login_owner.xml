@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:gravity="center"
     android:padding="15dp"
-    tools:context=".LoginOwner">
+    tools:context=".auth.LoginOwner">
 
     <TextView
         android:layout_width="match_parent"

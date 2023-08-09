@@ -1,4 +1,4 @@
-package com.b07group4;
+package com.b07group4.auth;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.b07group4.R;
+import com.b07group4.Shop;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
