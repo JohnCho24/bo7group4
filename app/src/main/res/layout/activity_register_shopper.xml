@@ -59,14 +59,24 @@
         app:layout_constraintVertical_bias="0.832" />
 
     <TextView
-        android:id="@+id/shopperToLogin"
+        android:id="@+id/shopperToLoginPrompt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:gravity="center"
         android:onClick="clickShopperLogin"
+        android:text="@string/click_to_login_prompt"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/shopperToLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:onClick="clickShopperLogin"
         android:text="@string/click_to_login"
         android:textSize="20sp"
-        android:textStyle="bold"
-        tools:text="Already have an account? Click here!" />
+        android:textStyle="bold"/>
+
 </LinearLayout>
