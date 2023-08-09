@@ -20,12 +20,14 @@
         android:textStyle="bold" />
 
 
-    <ListView
-        android:id="@+id/listViewOrders"
-        android:layout_width="match_parent"
+    <ExpandableListView
+        android:id="@+id/expandableListView"
+        android:layoutDirection="rtl"
         android:layout_height="615dp"
-        android:divider="@null"
-        android:dividerHeight="0dp" />
+        android:layout_width="match_parent"
+        android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft"
+        android:divider="@android:color/darker_gray"
+        android:dividerHeight="0.5dp" />
 
     <Button
         android:id="@+id/backButton"

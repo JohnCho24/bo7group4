@@ -65,7 +65,7 @@ public class OwnerInventory extends AppCompatActivity {
 
         productsView.setAdapter(adapter);
         productsView.setLayoutManager(new LinearLayoutManager(this));
-        ((TextView)findViewById(R.id.store_name)).setText(storeName);
+        ((TextView)findViewById(R.id.inventoryHeader)).setText(storeName + " inventory");
 
         ProductManager.DBListener<List<Product>> myAmazingCode = l -> {
             products.clear();
