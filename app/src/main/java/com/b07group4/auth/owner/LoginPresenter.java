@@ -6,6 +6,11 @@ public class LoginPresenter implements AuthContract.Login.Presenter {
     private AuthContract.Login.View loginPage;
     private AuthContract.Login.Model model;
 
+    public LoginPresenter(AuthContract.Login.View v, AuthContract.Login.Model m) {
+        loginPage = v;
+        model = m;
+    }
+
     @Override
     public void onClickLogin() {
         loginPage.showLoading();
