@@ -31,9 +31,9 @@ public class ShopperCart extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private CartProductAdapter productAdapter;
-    private List<Product> myCart;
-    private double totalProductPrice = 0.0;
-    private TextView tvTotalPrice;
+    private static List<Product> myCart;
+    private static double totalProductPrice = 0.0;
+    private static TextView tvTotalPrice;
     private String currentUser;
     CartManager cm;
 
@@ -59,7 +59,8 @@ public class ShopperCart extends AppCompatActivity {
         updateTotalPriceUI();
     }
 
-    private void updateTotalPriceUI() {
+    public static void updateTotalPriceUI() {
+        totalProductPrice = 0;
         for (Product product : myCart) {
             totalProductPrice += product.getPrice();
         }
