@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/itemIdTV"
-        android:textSize="16sp"
+        android:textSize="14sp"
         android:text="ItemId: -Nawt9WG4LdZ5wqY0wJ7"
         android:paddingLeft="?android:expandableListPreferredChildIndicatorLeft"
         android:paddingStart="?android:expandableListPreferredChildIndicatorLeft"

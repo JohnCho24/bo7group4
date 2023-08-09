@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
+import com.b07group4.DataModels.Order;
+import com.b07group4.DataModels.Product;
 import com.b07group4.R;
 
 import java.util.HashMap;
@@ -17,36 +19,39 @@ import java.util.List;
 public class OrderAdapter extends BaseExpandableListAdapter {
 
     private Context context;
-    private List<String> orderId;
-    private List<String> orderStatus;
+    private List<Order> orders;
+    private HashMap<String, List<Product>> products;
+    private String username;
 
-    private HashMap<String, List<String>> itemIds;
-
-    public OrderAdapter(Context context, @Nullable List<String> orderId, @Nullable List<String> orderStatus, @Nullable HashMap<String, List<String>> itemIds) {
+    public OrderAdapter(Context context, String username, @Nullable List<Order> orders, @Nullable HashMap<String, List<Product>> products) {
+        this.username = username;
         this.context = context;
-        this.orderId = orderId;
-        this.orderStatus = orderStatus;
-        this.itemIds = itemIds;
+        this.orders = orders;
+        this.products = products;
     }
 
     @Override
     public int getGroupCount() {
-        return this.orderStatus.size();
+        return this.orders.size();
     }
 
     @Override
     public int getChildrenCount(int i) {
-        return this.itemIds.get(this.orderStatus.get(i)).size();
+        List<Product> ps = this.products.get(this.orders.get(i).getId());
+        if (ps == null)
+            return 0;
+
+        return ps.size();
     }
 
     @Override
     public Object getGroup(int i) {
-        return this.orderStatus.get(i);
+        return this.orders.get(i).getId();
     }
 
     @Override
     public Object getChild(int i, int i1) {
-        return this.itemIds.get(this.orderStatus.get(i)).get(i1);
+        return products.get(orders.get(i).getId()).get(i1);
     }
 
     @Override
@@ -66,7 +71,8 @@ public class OrderAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getGroupView(int i, boolean b, View view, ViewGroup viewGroup) {
-        String orderIdValue = orderId.get(i);
+        Order o = orders.get(i);
+
 
         if(view == null){
             LayoutInflater inflater = (LayoutInflater)this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -76,8 +82,8 @@ public class OrderAdapter extends BaseExpandableListAdapter {
         TextView h1 = view.findViewById(R.id.orderHeader1);
         TextView h2 = view.findViewById(R.id.orderHeader2);
 
-        h1.setText("Order ID: " + orderIdValue);
-        h2.setText("Order Status: " + orderStatus.get(i));
+        h1.setText("Order ID: " + o.getId());
+        h2.setText("Order Status: " + o.getSubStoreOrders().get(username).getOrderStatus());
 
         return view;
     }
@@ -85,7 +91,7 @@ public class OrderAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getChildView(int i, int i1, boolean b, View view, ViewGroup viewGroup) {
-        String title1 = (String) getChild(i, i1);
+        Product p = (Product) getChild(i, i1);
 
 
         if(view == null){
@@ -94,7 +100,7 @@ public class OrderAdapter extends BaseExpandableListAdapter {
         }
 
         TextView h1 = view.findViewById(R.id.itemIdTV);
-        h1.setText("Item ID: " + title1);
+        h1.setText("Item Name: " + p.getName());
 
         return view;
     }

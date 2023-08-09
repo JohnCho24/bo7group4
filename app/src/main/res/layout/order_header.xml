@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/orderHeader1"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         android:text="Order ID: -NbMIMzi5u0Ig-UhkMWJ"
         ></TextView>
@@ -19,9 +19,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/orderHeader2"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         android:text="Order Status: IN_PROCESS"
         ></TextView>
+
+
 
 </LinearLayout>

@@ -11,6 +11,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.b07group4.DBHandler.OrderManager;
+import com.b07group4.DBHandler.ProductManager;
+import com.b07group4.DataModels.Order;
+import com.b07group4.DataModels.Product;
+import com.b07group4.DataModels.SubStoreOrder;
 import com.b07group4.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -19,6 +24,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -26,94 +32,70 @@ import java.util.List;
 public class OwnersOrders extends AppCompatActivity {
 
     private DatabaseReference db;
-    private List<String> productIdList;
+    private ProductManager pm;
+    private OrderManager om;
 
     private String username, storeName;
 
     OrderAdapter myAdapter;
     ExpandableListView expandableListView;
-    private List<String> orderId;
-    private List<String> orderStatus;
-    private HashMap<String, List<String>> itemIdHash;
+    private List<Order> orders;
+    private HashMap<String, List<Product>> itemIdHash;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        Log.d("ORDER", "IN ORDER");
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_owners_orders);
-        db = FirebaseDatabase.getInstance().getReference();
+        pm = ProductManager.getInstance();
+        om = OrderManager.getInstance();
 
         username = getIntent().getStringExtra("OWNER_NAME");
         storeName = getIntent().getStringExtra("STORE_NAME");
 
         expandableListView = findViewById(R.id.expandableListView);
-        productIdList = new ArrayList<>();
 
-        showList();
-
-        myAdapter = new OrderAdapter(this, orderId, orderStatus, itemIdHash);
+        itemIdHash = new HashMap<>();
+        orders = new ArrayList<>();
+        myAdapter = new OrderAdapter(this, username, orders, itemIdHash);
         expandableListView.setAdapter(myAdapter);
 
+        showList();
     }
 
     public void showList(){
 
-        orderId = new ArrayList<String>();
-        orderStatus = new ArrayList<String>();
-        itemIdHash = new HashMap<String, List<String>>();
+        orders.clear();
+        itemIdHash.clear();
 
-        DatabaseReference ordersRef = db.child("Orders");
+        pm.GetAll(allProducts -> {
+            om.GetAll(list -> {
+                for (Order o : list) {
+                    if (o.getSubStoreOrders().containsKey(username)) {
+                        orders.add(o);
+                        itemIdHash.put(o.getId(), new ArrayList<>());
 
-        ordersRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+                        SubStoreOrder sso = o.getSubStoreOrders().get(username);
 
-                for (DataSnapshot orderSnapshot : dataSnapshot.getChildren()) {
-                    DataSnapshot ownerOrderSnapshot = orderSnapshot.child("subStoreOrders").child(username);
+                        String[] ids = sso != null ? sso.getProductIdList().split(",\\s*") : new String[]{};
 
-                    // Not found
-                    if (!ownerOrderSnapshot.exists()) {
-                        continue;
-                    }
-
-                    // Get
-                    String id = ownerOrderSnapshot.child("productIdList").getValue(String.class);
-                    String orderStatusValue = ownerOrderSnapshot.child("orderStatus").getValue(String.class);
-
-                    // Order status & id
-                    orderId.add(orderSnapshot.getKey());
-                    orderStatus.add(ownerOrderSnapshot.child("orderStatus").getValue(String.class));
-
-
-                    if (id != null) {
-                        // Split
-                        String[] productIds = id.split(",\\s*");
-                        for (String productId : productIds) {
-                            productIdList.add(productId);
+                        for (String id : ids) {
+                            for (Product pp : allProducts) {
+                                if (pp.getId().equals(id)) {
+                                    itemIdHash.get(o.getId()).add(pp);
+                                    break;
+                                }
+                            }
                         }
-
-                        // Populate hash map
-                        itemIdHash.put(orderStatusValue, new ArrayList<>(productIdList));
-                        productIdList.clear();
                     }
                 }
-
                 myAdapter.notifyDataSetChanged();
-
-                // No orders
-                if (itemIdHash.isEmpty()) {
-                    TextView tv = findViewById(R.id.textViewHeader);
-                    tv.setText("NO ONGOING ORDERS");
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-            }
+            });
         });
     }
+
+
+
 
     // Back button
     public void onClickBack(View view){
