@@ -23,8 +23,10 @@
     <string name="RegisterShopper">Register</string>
     <string name="RegisterShopperHeader">Shopper Registration</string>
     <string name="LoginShopperHeader">Shopper Login</string>
-    <string name="click_to_login">Click to login!</string>
-    <string name="click_to_register">Click to register!</string>
+    <string name="click_to_login_prompt">Already have an account?</string>
+    <string name="click_to_login">Login here!</string>
+    <string name="click_to_register_prompt">Don\'t have an account?</string>
+    <string name="click_to_register">Register here!</string>
     <string name="logout">Logout</string>
     <string name="add_product">Add product</string>
     <string name="name">Name</string>
@@ -37,5 +39,11 @@
     <string name="back">Back</string>
     <string name="inventory">Inventory</string>
     <string name="ShopperPage">Welcome to Javan\'s Mall </string>
+    <string name="addToCart">Add to Cart</string>
+    <string name="your_cart">Your Cart</string>
+    <string name="shopper_page">Shopper Page</string>
     <string name="edit_product">Edit product</string>
+    <string name="discover">Discover</string>
+    <string name="checkout">Checkout</string>
+    <string name="removeFromCart">Delete</string>
 </resources>
