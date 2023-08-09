@@ -74,6 +74,9 @@ public class ShopperCart extends AppCompatActivity {
 
         finish();
     }
+    public void onClickBack(View view){
+        finish();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
