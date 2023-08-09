@@ -76,8 +76,11 @@ public class RegisterShopper extends AppCompatActivity {
                         userText.setText("");
                         userPass.setText("");
 
+                        String currOrderID = ref.push().getKey();
+
                         // Store
                         ref.child("Shoppers").child(username).child("password").setValue(password);
+                        ref.child("Shoppers").child(username).child("currOrderID").setValue(currOrderID);
 
                         // Account created message
                         Toast.makeText(RegisterShopper.this, "Account created", Toast.LENGTH_SHORT).show();

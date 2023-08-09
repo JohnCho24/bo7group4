@@ -1,48 +1,46 @@
 package com.b07group4.DataModels;
 
-import com.b07group4.DataModels.Item;
-
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Order {
-    private String orderId;
-    private String orderStatus;
-    private String shopperId;
-    private String storeId;
 
-    public Order() {
-    }
+    public enum OrderStatus {
+        IN_CART,
+        IN_PROCESS,
+        DONE
+    };
 
-    // Getters and setters for each field
-    public String getOrderId() {
-        return orderId;
-    }
+        private String orderId;
+        private String shopperId;
+        private Map<String, SubStoreOrder> subStoreOrders;
 
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
-    }
+        public Order() {
+            subStoreOrders = new HashMap<>();
+        }
 
-    public String getOrderStatus() {
-        return orderStatus;
-    }
+        public String getOrderId() {
+            return orderId;
+        }
 
-    public void setOrderStatus(String orderStatus) {
-        this.orderStatus = orderStatus;
-    }
+        public void setOrderId(String orderId) {
+            this.orderId = orderId;
+        }
 
-    public String getShopperId() {
-        return shopperId;
-    }
+        public String getShopperId() {
+            return shopperId;
+        }
 
-    public void setShopperId(String shopperId) {
-        this.shopperId = shopperId;
-    }
+        public void setShopperId(String shopperId) {
+            this.shopperId = shopperId;
+        }
 
-    public String getStoreId() {
-        return storeId;
-    }
+        public Map<String, SubStoreOrder> getSubStoreOrders() {
+            return subStoreOrders;
+        }
 
-    public void setStoreId(String storeId) {
-        this.storeId = storeId;
-    }
+        public void setSubStoreOrder(String storeName, SubStoreOrder subStoreOrder) {
+            subStoreOrders.put(storeName, subStoreOrder);
+        }
 }

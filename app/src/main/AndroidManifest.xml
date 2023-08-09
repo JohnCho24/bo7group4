@@ -21,6 +21,9 @@
             android:name=".StoreProductsPage"
             android:exported="false" />
         <activity
+            android:name=".ShopperCart"
+            android:exported="false" />
+        <activity
             android:name=".Shop"
             android:exported="false" />
         <activity
@@ -32,6 +35,9 @@
         <activity
             android:name=".RegisterShopper"
             android:exported="false" />
+        <activity
+            android:name=".Shop"
+            android:exported="false"/>
         <activity
             android:name=".RegisterOwner"
             android:exported="false" />

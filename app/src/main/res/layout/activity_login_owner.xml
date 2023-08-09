@@ -60,15 +60,23 @@
         app:layout_constraintVertical_bias="0.832" />
 
     <TextView
-        android:id="@+id/ownerSignupButton"
+        android:id="@+id/ownerSignupButtonPrompt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:gravity="center"
         android:onClick="clickSignup"
+        android:text="@string/click_to_register_prompt"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/ownerSignupButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:onClick="clickSignup"
         android:text="@string/click_to_register"
         android:textSize="20sp"
-        android:textStyle="bold"
-        tools:text="Don't have an account? Click here!" />
-
+        android:textStyle="bold"/>
 </LinearLayout>
