@@ -6,7 +6,10 @@ import com.b07group4.mvp_stuffs.Contract;
 
 public interface AuthContract extends Contract {
     interface Home {
-        interface View extends Contract.View {}
+        interface View extends Contract.View {
+            void goToOwnerAuth();
+            void goToShopperAuth();
+        }
 
         interface Presenter extends Contract.Presenter {
             void onClickAsOwner();

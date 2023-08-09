@@ -14,7 +14,6 @@ public class RegisterPresenter implements AuthContract.Register.Presenter {
             registerPage.hideLoading();
             if (u != null) {
                 registerPage.onSuccess();
-//                registerPage.onSuccess();
             } else {
                 registerPage.onFailure();
             }

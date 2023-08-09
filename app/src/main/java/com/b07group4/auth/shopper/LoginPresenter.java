@@ -8,6 +8,15 @@ public class LoginPresenter implements AuthContract.Login.Presenter {
 
     @Override
     public void onClickLogin() {
-        model.login(loginPage.getUser(), u -> {});
+        loginPage.showLoading();
+
+        model.login(loginPage.getUser(), u -> {
+            loginPage.hideLoading();
+            if (u != null) {
+                loginPage.onSuccess();
+            } else {
+                loginPage.onFailure();
+            }
+        });
     }
 }

@@ -1,17 +1,17 @@
 package com.b07group4.auth.home;
 
 import com.b07group4.auth.AuthContract;
-import com.b07group4.mvp_stuffs.Contract;
 
 public class HomePresenter implements AuthContract.Home.Presenter {
+    AuthContract.Home.View homepage;
+
     @Override
     public void onClickAsOwner() {
-        // TODO go to login as owner
-
+        homepage.goToOwnerAuth();
     }
 
     @Override
     public void onClickAsShopper() {
-        // TODO go to login as shopper
+        homepage.goToShopperAuth();
     }
 }

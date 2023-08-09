@@ -8,8 +8,15 @@ public class RegisterPresenter implements AuthContract.Register.Presenter {
 
     @Override
     public void onClickRegister() {
-        model.register(registerPage.getUser(), u -> {
+        registerPage.showLoading();
 
+        model.register(registerPage.getUser(), u -> {
+            registerPage.hideLoading();
+            if (u != null) {
+                registerPage.onSuccess();
+            } else {
+                registerPage.onFailure();
+            }
         });
     }
 }
