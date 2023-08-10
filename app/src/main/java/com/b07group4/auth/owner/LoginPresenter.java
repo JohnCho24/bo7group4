@@ -4,11 +4,24 @@ import com.b07group4.auth.AuthContract;
 
 public class LoginPresenter implements AuthContract.Login.Presenter {
     private AuthContract.Login.View loginPage;
+    private AuthContract.Login.Model model;
 
-    private AuthContract.Login.Model am;
+    public LoginPresenter(AuthContract.Login.View v, AuthContract.Login.Model m) {
+        loginPage = v;
+        model = m;
+    }
 
     @Override
     public void onClickLogin() {
-        // TODO
+        loginPage.showLoading();
+
+        model.login(loginPage.getUser(), u -> {
+            loginPage.hideLoading();
+            if (u != null) {
+                loginPage.onSuccess(u);
+            } else {
+                loginPage.onFailure();
+            }
+        });
     }
 }
