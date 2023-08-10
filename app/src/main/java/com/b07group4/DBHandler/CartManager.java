@@ -67,7 +67,7 @@ public class CartManager {
 
             SubStoreOrder subStoreOrder = new SubStoreOrder();
             String productListString = TextUtils.join(", ", productIds);
-            subStoreOrder.setOrderStatus("IN_PROCESS");
+            subStoreOrder.setOrderStatus(Order.OrderStatus.IN_PROCESS);
             subStoreOrder.setProductIdList(productListString);
             order.setSubStoreOrder(storeName, subStoreOrder);
         }

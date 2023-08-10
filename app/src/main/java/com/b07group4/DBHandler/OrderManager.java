@@ -90,5 +90,15 @@ public class OrderManager {
             cb.OnData(task.getResult().getValue(Order.class));
         });
     }
+
+    public void Finish(String id, String username, DBCallback<Order> cb) {
+        db
+                .child(id)
+                .child("subStoreOrders")
+                .child(username)
+                .child("orderStatus")
+                .setValue(Order.OrderStatus.DONE);
+        cb.OnData(null);
+    }
 }
 

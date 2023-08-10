@@ -13,7 +13,7 @@ public class Order {
 
         private String id;
         private String shopperId;
-        private Map<String, SubStoreOrder> subStoreOrders;
+        private final Map<String, SubStoreOrder> subStoreOrders;
 
         public Order() {
             subStoreOrders = new HashMap<>();
