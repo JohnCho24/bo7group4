@@ -16,18 +16,20 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 public class HomePresenterTest {
     @Mock
-    HomePage view;
+    private AuthContract.Home.View view;
 
-    private HomePresenter presenter = new HomePresenter(view);
+
 
     @Test
     public void onClickAsOwner() {
+        HomePresenter presenter = new HomePresenter(view);
         presenter.onClickAsOwner();
         verify(view).goToOwnerAuth();
     }
 
     @Test
     public void onClickAsShopper() {
+        HomePresenter presenter = new HomePresenter(view);
         presenter.onClickAsShopper();
         verify(view).goToShopperAuth();
     }
