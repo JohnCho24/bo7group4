@@ -120,8 +120,12 @@ public class LoginPage extends AppCompatActivity implements AuthContract.Login.V
     }
 
     @Override
-    public void onSuccess() {
+    public void onSuccess(User u) {
         Toast.makeText(com.b07group4.auth.shopper.LoginPage.this, "Login Successful!", Toast.LENGTH_SHORT).show();
+
+        Intent i = new Intent(this, ShopperPage.class);
+        i.putExtra("OWNER_NAME", u.getUsername());
+        startActivity(i);
     }
 
     @Override

@@ -18,7 +18,7 @@ public class LoginPresenter implements AuthContract.Login.Presenter {
         model.login(loginPage.getUser(), u -> {
             loginPage.hideLoading();
             if (u != null) {
-                loginPage.onSuccess();
+                loginPage.onSuccess(u);
             } else {
                 loginPage.onFailure();
             }
