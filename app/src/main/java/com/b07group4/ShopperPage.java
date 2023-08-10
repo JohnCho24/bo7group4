@@ -11,6 +11,8 @@ import android.os.Bundle;
 
 import com.b07group4.DBHandler.ProductManager;
 import com.b07group4.DataModels.Owner;
+import com.b07group4.owner_orders.OwnersOrders;
+import com.b07group4.shopper_orders.ShopperOrders;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -27,6 +29,7 @@ public class ShopperPage extends AppCompatActivity {
     private ProductManager pm;
     private List<Owner> storeList;
     private StoreViewAdapter storeViewAdapter;
+    private String shopperName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +38,7 @@ public class ShopperPage extends AppCompatActivity {
         SharedPreferences preferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
         String currentUser = preferences.getString("currentUser", null);
         //Log.d("user", currentUser);
+        shopperName = getIntent().getStringExtra("SHOPPER_NAME");
         recyclerViewStores = findViewById(R.id.recyclerViewStores);
         recyclerViewStores.setLayoutManager(new GridLayoutManager(this, 1));
         ownersRef = FirebaseDatabase.getInstance().getReference("Owners");
@@ -81,6 +85,13 @@ public class ShopperPage extends AppCompatActivity {
         Intent intent = new Intent(this, ShopperCart.class);
         startActivity(intent);
     }
+
+    public void clickPrevOrders(View view){
+        Intent intent = new Intent(this, ShopperOrders.class);
+        intent.putExtra("SHOPPER_NAME", shopperName);
+        startActivity(intent);
+    }
+
     public void onClickLogout(View v){
         Intent i = new Intent(this, HomePage.class);
         Toast.makeText(this, "Logout successful", Toast.LENGTH_SHORT).show();

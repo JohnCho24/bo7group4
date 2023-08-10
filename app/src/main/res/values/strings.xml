@@ -46,4 +46,5 @@
     <string name="discover">Discover</string>
     <string name="checkout">Checkout</string>
     <string name="removeFromCart">Delete</string>
+    <string name="your_orders">Orders</string>
 </resources>
