@@ -11,23 +11,27 @@
         android:id="@+id/textViewOrderId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:textSize="18sp" />
-
-    <TextView
-        android:id="@+id/textViewShopperId"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="16sp" />
+        android:text="OrderID: -NbMIMzi5u0Ig-UhkMWJ"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textViewStatus"
+        android:text="Order Status: IN_PROCESS"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="16sp" />
 
     <TextView
-        android:id="@+id/textViewTotalAmount"
+        android:id="@+id/textViewItemId"
+        android:text="ItemId: -Nawt9WG4LdZ5wqY0wJ7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/textViewUser"
+        android:text="Order Placed by: User3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="16sp" />

@@ -1,6 +1,5 @@
 package com.b07group4.DBHandler;
 
-import android.content.Intent;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -12,7 +11,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 
 public class CartManager {
     private static CartManager instance_;
@@ -69,14 +67,14 @@ public class CartManager {
 
             SubStoreOrder subStoreOrder = new SubStoreOrder();
             String productListString = TextUtils.join(", ", productIds);
-            subStoreOrder.setOrderStatus("IN_PROCESS");
+            subStoreOrder.setOrderStatus(Order.OrderStatus.IN_PROCESS);
             subStoreOrder.setProductIdList(productListString);
             order.setSubStoreOrder(storeName, subStoreOrder);
         }
 
         orderManager.Create(order, data -> {
             if (data != null) {
-                String orderId = data.getOrderId();
+                String orderId = data.getId();
                 Log.d("DBG", "Order created successfully. Order ID: " + orderId);
 
                 CartManager.getInstance().ClearCart();
