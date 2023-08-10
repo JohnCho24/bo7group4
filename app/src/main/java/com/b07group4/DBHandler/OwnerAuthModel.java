@@ -34,8 +34,10 @@ public class OwnerAuthModel implements AuthContract.Login.Model, AuthContract.Re
                     Owner o = d.getResult().getValue(Owner.class);
                     if (o == null || !o.getPassword().equals(u.getPassword())) {
                         cb.OnData(null);
+                        return;
                     }
 
+                    o.setUsername(u.getUsername());
                     cb.OnData(o);
                 } catch (Exception e) {
                     Log.d("DBG", e.getMessage());
@@ -52,9 +54,10 @@ public class OwnerAuthModel implements AuthContract.Login.Model, AuthContract.Re
             cb.OnData(null);
             return;
         }
-        String password = u.getPassword();
-        String username = u.getUsername();
-        String storeName = ((Owner) u).getStoreName();
+        Owner o = (Owner) u;
+        String password = o.getPassword();
+        String username = o.getUsername();
+        String storeName = o.getStoreName();
 
         // Password requirements
         if(password.length() < 4){
@@ -74,9 +77,9 @@ public class OwnerAuthModel implements AuthContract.Login.Model, AuthContract.Re
         ref.get().addOnCompleteListener(d -> {
             if (!created.get()) {
                 if (d.isSuccessful() && !d.getResult().exists()) {
-                    ref.setValue(u);
+                    ref.setValue(o);
                     created.set(true);
-                    cb.OnData(u);
+                    cb.OnData(o);
                 }
                 else {
                     cb.OnData(null);

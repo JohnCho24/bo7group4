@@ -33,6 +33,7 @@ public class ShopperAuthModel implements AuthContract.Login.Model, AuthContract.
                         cb.OnData(null);
                     }
 
+                    s.setUsername(u.getUsername());
                     cb.OnData(s);
                 } catch (Exception e) {
                     Log.d("DBG", e.getMessage());
@@ -69,9 +70,10 @@ public class ShopperAuthModel implements AuthContract.Login.Model, AuthContract.
         DatabaseReference ref = db.child(username);
         ref.get().addOnCompleteListener(d -> {
             if (!created.get()) {
-                if (!d.isSuccessful()) {
+                if (d.isSuccessful() && !d.getResult().exists()) {
                     ref.setValue(u);
                     created.set(true);
+                    cb.OnData(u);
                 }
                 else {
                     cb.OnData(null);

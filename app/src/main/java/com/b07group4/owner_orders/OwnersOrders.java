@@ -1,13 +1,8 @@
 package com.b07group4.owner_orders;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ExpandableListView;
-import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,7 +24,6 @@ public class OwnersOrders extends AppCompatActivity {
     private DatabaseReference db;
     private ProductManager pm;
     private OrderManager om;
-
     private String username, storeName;
 
     OrderAdapter myAdapter;
@@ -64,9 +58,9 @@ public class OwnersOrders extends AppCompatActivity {
                     }
                 }
 
-
                 // Refresh & Success
                 Toast.makeText(this, "Order Status Changed", Toast.LENGTH_SHORT).show();
+                myAdapter.notifyDataSetChanged();
             });
         });
         expandableListView.setAdapter(myAdapter);
