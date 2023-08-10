@@ -1,17 +1,18 @@
 package com.b07group4;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Bundle;
-
-
 import com.b07group4.DBHandler.ProductManager;
 import com.b07group4.DataModels.Owner;
-import com.b07group4.owner_orders.OwnersOrders;
+import com.b07group4.auth.home.HomePage;
 import com.b07group4.shopper_orders.ShopperOrders;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
@@ -19,8 +20,6 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
-import android.view.View;
-import android.widget.Toast;
 
 public class ShopperPage extends AppCompatActivity {
 
@@ -54,7 +53,6 @@ public class ShopperPage extends AppCompatActivity {
                     Owner store = d.getValue(Owner.class);
                     if (store != null) {
                         store.setUsername(d.getKey());
-                        store.setStoreName(d.getKey());
                         storeList.add(store);
                     }
                 }

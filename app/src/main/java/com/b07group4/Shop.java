@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.b07group4.auth.home.HomePage;
 import com.b07group4.owner_inventory.OwnerInventory;
 import com.b07group4.owner_orders.OwnersOrders;
 
@@ -47,7 +48,6 @@ public class Shop extends AppCompatActivity {
         startActivity(intent);
     }
 
-    // Logout button that goes to home page
     public void onClickLogout(View v){
         Intent i = new Intent(this, HomePage.class);
         Toast.makeText(this, "Logout successful", Toast.LENGTH_SHORT).show();

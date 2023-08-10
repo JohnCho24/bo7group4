@@ -10,7 +10,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.b07group4.DBHandler.OrderManager;
@@ -18,17 +17,10 @@ import com.b07group4.DBHandler.ProductManager;
 import com.b07group4.DataModels.Order;
 import com.b07group4.DataModels.Product;
 import com.b07group4.DataModels.SubStoreOrder;
-import com.b07group4.LoginOwner;
 import com.b07group4.R;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 

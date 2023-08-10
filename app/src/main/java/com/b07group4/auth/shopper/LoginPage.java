@@ -1,4 +1,4 @@
-package com.b07group4;
+package com.b07group4.auth.shopper;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,14 +10,20 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.b07group4.DataModels.Shopper;
+import com.b07group4.DataModels.User;
+import com.b07group4.R;
+import com.b07group4.ShopperPage;
+import com.b07group4.auth.AuthContract;
+import com.b07group4.auth.home.HomePage;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class LoginShopper extends AppCompatActivity {
-
+public class LoginPage extends AppCompatActivity implements AuthContract.Login.View {
+    private AuthContract.Login.Presenter presenter;
     FirebaseDatabase db;
 
     @Override
@@ -33,7 +39,7 @@ public class LoginShopper extends AppCompatActivity {
     }
 
     public void clickShopperSignup(View view){
-        Intent intent = new Intent(this, RegisterShopper.class);
+        Intent intent = new Intent(this, RegisterPage.class);
         startActivity(intent);
     }
 
@@ -63,14 +69,14 @@ public class LoginShopper extends AppCompatActivity {
 
                     // Check if password is correct
                     if(dataSnapshot.child("password").getValue(String.class).equals(password)){
-                        Toast.makeText(LoginShopper.this, "Login Successful ", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginPage.this, "Login Successful ", Toast.LENGTH_SHORT).show();
                         SharedPreferences preferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);// helps you remember login info when in different pages
                         SharedPreferences.Editor editor = preferences.edit();
                         editor.putString("currentUser", username);
                         editor.apply();
 
                         // Redirect to Shopper page after login
-                        Intent intent = new Intent(LoginShopper.this, ShopperPage.class);
+                        Intent intent = new Intent(LoginPage.this, ShopperPage.class);
                         startActivity(intent);
 
                         // Blank
@@ -81,14 +87,14 @@ public class LoginShopper extends AppCompatActivity {
 
                     }
                     else{
-                        Toast.makeText(LoginShopper.this, "Password Incorrect", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginPage.this, "Password Incorrect", Toast.LENGTH_SHORT).show();
                         userPass.setText("");
                     }
                 }
 
                 // User not found
                 else {
-                    Toast.makeText(LoginShopper.this, "User not found", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginPage.this, "User not found", Toast.LENGTH_SHORT).show();
                 }
             }
             public void clearData() {
@@ -104,4 +110,42 @@ public class LoginShopper extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void showLoading() {
+        Toast.makeText(com.b07group4.auth.shopper.LoginPage.this, "Logging in...", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void hideLoading() {
+    }
+
+    @Override
+    public void onSuccess(User u) {
+        Toast.makeText(com.b07group4.auth.shopper.LoginPage.this, "Login Successful!", Toast.LENGTH_SHORT).show();
+
+        Intent i = new Intent(this, ShopperPage.class);
+        i.putExtra("OWNER_NAME", u.getUsername());
+        startActivity(i);
+    }
+
+    @Override
+    public void onFailure() {
+        Toast.makeText(com.b07group4.auth.shopper.LoginPage.this, "Login Failed!", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public User getUser() {
+        Shopper s = new Shopper();
+
+        EditText userText = (EditText) findViewById(R.id.shopperUsername);
+        String username = userText.getText().toString();
+
+        EditText userPass = (EditText) findViewById(R.id.shopperPassword);
+        String password = userPass.getText().toString();
+
+        s.setUsername(username);
+        s.setPassword(password);
+
+        return s;
+    }
 }

@@ -1,16 +1,9 @@
 package com.b07group4.shopper_orders;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ExpandableListView;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.b07group4.DBHandler.OrderManager;
@@ -18,24 +11,14 @@ import com.b07group4.DBHandler.ProductManager;
 import com.b07group4.DataModels.Order;
 import com.b07group4.DataModels.Product;
 import com.b07group4.DataModels.SubStoreOrder;
-import com.b07group4.LoginOwner;
 import com.b07group4.R;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class ShopperOrders extends AppCompatActivity {
-
-    private DatabaseReference db;
     private ProductManager pm;
     private OrderManager om;
     private String username;
@@ -43,7 +26,6 @@ public class ShopperOrders extends AppCompatActivity {
     OrderAdapter myAdapter;
     ExpandableListView expandableListView;
     private List<Order> orders;
-    private List<String> storeOwner;
     private HashMap<String, List<Product>> itemIdHash;
 
     @Override
@@ -62,21 +44,6 @@ public class ShopperOrders extends AppCompatActivity {
         itemIdHash = new HashMap<>();
         orders = new ArrayList<>();
         myAdapter = new OrderAdapter(this, username, orders, itemIdHash);
-//        myAdapter.setOnClick(oid -> {
-//            om.Finish(oid, storeOwner, o -> {
-//                for(Order rd : orders){
-//                    if(rd.getId().equals(oid)){
-//                        rd.getSubStoreOrders().get(storeOwner).setOrderStatus(Order.OrderStatus.DONE);
-//                        myAdapter.notifyDataSetChanged();
-//                        break;
-//                    }
-//                }
-//
-//
-//                // Refresh & Success
-//                Toast.makeText(this, "Order Status Changed", Toast.LENGTH_SHORT).show();
-//            });
-//        });
         expandableListView.setAdapter(myAdapter);
 
         showList();
