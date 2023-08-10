@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.verify;
 
 import com.b07group4.auth.AuthContract;
+import com.b07group4.auth.home.HomePage;
 import com.b07group4.auth.home.HomePresenter;
 
 import org.junit.Test;
@@ -15,7 +16,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 public class HomePresenterTest {
     @Mock
-    AuthContract.Home.View view;
+    HomePage view;
 
     private HomePresenter presenter = new HomePresenter(view);
 
