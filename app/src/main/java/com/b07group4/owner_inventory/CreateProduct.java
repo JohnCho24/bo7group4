@@ -4,7 +4,6 @@ import static java.lang.Double.parseDouble;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -14,10 +13,7 @@ import android.widget.Toast;
 
 import com.b07group4.DBHandler.ProductManager;
 import com.b07group4.DataModels.Product;
-import com.b07group4.LoginOwner;
 import com.b07group4.R;
-
-import org.w3c.dom.Text;
 
 public class CreateProduct extends AppCompatActivity {
 

@@ -33,16 +33,16 @@
             android:name=".ShopperPage"
             android:exported="false" />
         <activity
-            android:name=".RegisterShopper"
+            android:name=".auth.shopper.RegisterPage"
             android:exported="false" />
         <activity
             android:name=".Shop"
             android:exported="false"/>
         <activity
-            android:name=".RegisterOwner"
+            android:name=".auth.owner.RegisterPage"
             android:exported="false" />
         <activity
-            android:name=".HomePage"
+            android:name=".auth.home.HomePage"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -51,10 +51,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginOwner"
+            android:name=".auth.owner.LoginPage"
             android:exported="false" />
         <activity
-            android:name=".LoginShopper"
+            android:name=".auth.shopper.LoginPage"
             android:exported="false" />
         <activity
             android:name=".owner_inventory.OwnerInventory"
