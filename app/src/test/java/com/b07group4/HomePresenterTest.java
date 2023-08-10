@@ -16,8 +16,8 @@ import org.mockito.runners.MockitoJUnitRunner;
 public class HomePresenterTest {
     @Mock
     AuthContract.Home.View view;
-    @Mock
-    HomePresenter presenter;
+
+    private HomePresenter presenter = new HomePresenter(view);
 
     @Test
     public void onClickAsOwner() {
