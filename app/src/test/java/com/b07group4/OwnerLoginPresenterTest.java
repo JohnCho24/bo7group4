@@ -38,7 +38,7 @@ public class OwnerLoginPresenterTest {
         verify(view).showLoading();
         verify(model).login(eq(testUser), any(DBCallback.class));
         verify(view).hideLoading();
-        verify(view).onSuccess();
+        verify(view).onSuccess(testUser);
     }
 
     @Test
