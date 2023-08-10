@@ -1,7 +1,6 @@
 package com.b07group4.DataModels;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Order {
@@ -12,20 +11,20 @@ public class Order {
         DONE
     };
 
-        private String orderId;
+        private String id;
         private String shopperId;
-        private Map<String, SubStoreOrder> subStoreOrders;
+        private final Map<String, SubStoreOrder> subStoreOrders;
 
         public Order() {
             subStoreOrders = new HashMap<>();
         }
 
-        public String getOrderId() {
-            return orderId;
+        public String getId() {
+            return id;
         }
 
-        public void setOrderId(String orderId) {
-            this.orderId = orderId;
+        public void setId(String id) {
+            this.id = id;
         }
 
         public String getShopperId() {
