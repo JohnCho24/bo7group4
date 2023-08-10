@@ -26,7 +26,7 @@ public class OrderAdapter extends BaseExpandableListAdapter {
     private Context context;
     private List<Order> orders;
     private HashMap<String, List<Product>> products;
-    private String username, storeOwner;
+    private String username;
 
 
     private List<String> orderId;
@@ -38,18 +38,11 @@ public class OrderAdapter extends BaseExpandableListAdapter {
 
     private HashMap<String, List<String>> itemIds;
 
-    interface ClickTheButt {
-        void onClick(String orderId);
-    }
-
-    private ClickTheButt onClick;
-
-    public OrderAdapter(Context context, String username, @Nullable List<Order> orders, @Nullable HashMap<String, List<Product>> products, String storeOwner) {
+    public OrderAdapter(Context context, String username, @Nullable List<Order> orders, @Nullable HashMap<String, List<Product>> products) {
         this.username = username;
         this.context = context;
         this.orders = orders;
         this.products = products;
-        this.storeOwner = storeOwner;
     }
 
     @Override
@@ -98,24 +91,15 @@ public class OrderAdapter extends BaseExpandableListAdapter {
 
         if(view == null){
             LayoutInflater inflater = (LayoutInflater)this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.order_header, null);
+            view = inflater.inflate(R.layout.order_header2, null);
         }
 
         TextView h1 = view.findViewById(R.id.orderHeader1);
         TextView h2 = view.findViewById(R.id.orderHeader2);
 
         h1.setText("Order ID: " + o.getId());
-        h2.setText("Order Status: " + o.getSubStoreOrders().get(storeOwner).getOrderStatus());
+        h2.setText("Order Status: " + o.getSubStoreOrders().get(username).getOrderStatus());
 
-        // Button stuff
-        Button button = (Button) view.findViewById(R.id.statusButton);
-
-        button.setFocusable(false);
-
-        // Button to change order status
-        button.setOnClickListener(v -> {
-            onClick.onClick(o.getId());
-        });
         return view;
     }
 
@@ -139,8 +123,5 @@ public class OrderAdapter extends BaseExpandableListAdapter {
     @Override
     public boolean isChildSelectable(int i, int i1) {
         return true;
-    }
-    public void setOnClick(ClickTheButt onClick) {
-        this.onClick = onClick;
     }
 }

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="4dp"
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/orderHeader1"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:text="Order ID: -NbMIMzi5u0Ig-UhkMWJ"
+        ></TextView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/orderHeader2"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:text="Order Status: IN_PROCESS"
+        ></TextView>
+
+
+</LinearLayout>

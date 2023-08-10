@@ -31,6 +31,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ShopperOrders extends AppCompatActivity {
 
@@ -60,7 +61,7 @@ public class ShopperOrders extends AppCompatActivity {
 
         itemIdHash = new HashMap<>();
         orders = new ArrayList<>();
-        myAdapter = new OrderAdapter(this, username, orders, itemIdHash, storeOwner);
+        myAdapter = new OrderAdapter(this, username, orders, itemIdHash);
 //        myAdapter.setOnClick(oid -> {
 //            om.Finish(oid, storeOwner, o -> {
 //                for(Order rd : orders){
@@ -90,24 +91,23 @@ public class ShopperOrders extends AppCompatActivity {
             om.GetAll(list -> {
                 for (Order o : list) {
                     String userid = o.getShopperId();
-                    String ord = o.getId();
                     if (userid.equals(username)) {
-                        String [] storeOwner = db.child(ord).child("subStoreOrders").get
                         orders.add(o);
                         itemIdHash.put(o.getId(), new ArrayList<>());
 
-                        SubStoreOrder sso = o.getSubStoreOrders().get(storeOwner);
+                        Map<String, SubStoreOrder> mapp = o.getSubStoreOrders();
+                        o.getSubStoreOrders().forEach((x, sso) -> {
+                            String[] ids = sso != null ? sso.getProductIdList().split(",\\s*") : new String[]{};
 
-                        String[] ids = sso != null ? sso.getProductIdList().split(",\\s*") : new String[]{};
-
-                        for (String id : ids) {
-                            for (Product pp : allProducts) {
-                                if (pp.getId().equals(id)) {
-                                    itemIdHash.get(o.getId()).add(pp);
-                                    break;
+                            for (String id : ids) {
+                                for (Product pp : allProducts) {
+                                    if (pp.getId().equals(id)) {
+                                        itemIdHash.get(o.getId()).add(pp);
+                                        break;
+                                    }
                                 }
                             }
-                        }
+                        });
                     }
                 }
                 myAdapter.notifyDataSetChanged();
