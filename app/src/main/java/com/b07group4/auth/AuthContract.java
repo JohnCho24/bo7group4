@@ -27,7 +27,7 @@ public interface AuthContract extends Contract {
         interface View extends Contract.View {
             void showLoading();
             void hideLoading();
-            void onSuccess();
+            void onSuccess(User u);
             void onFailure();
             User getUser();
         }
@@ -45,7 +45,7 @@ public interface AuthContract extends Contract {
         interface View extends Contract.View {
             void showLoading();
             void hideLoading();
-            void onSuccess();
+            void onSuccess(User u);
             void onFailure();
             User getUser();
         }
