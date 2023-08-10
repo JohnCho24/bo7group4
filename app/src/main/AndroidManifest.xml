@@ -27,7 +27,7 @@
             android:name=".Shop"
             android:exported="false" />
         <activity
-            android:name=".OwnersOrders"
+            android:name=".owner_orders.OwnersOrders"
             android:exported="false" />
         <activity
             android:name=".ShopperPage"

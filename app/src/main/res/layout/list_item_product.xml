@@ -6,7 +6,6 @@
     android:orientation="vertical"
     android:padding="8dp">
 
-    <!-- Add any additional views here to display the product information -->
     <TextView
         android:id="@+id/textViewProductName"
         android:layout_width="wrap_content"
@@ -24,6 +23,5 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <!-- Add more TextViews or ImageViews to display additional product information -->
 
 </LinearLayout>

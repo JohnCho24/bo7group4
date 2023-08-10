@@ -51,7 +51,6 @@ public class ShopperPage extends AppCompatActivity {
                     Owner store = d.getValue(Owner.class);
                     if (store != null) {
                         store.setUsername(d.getKey());
-                        store.setStoreName(d.getKey());
                         storeList.add(store);
                     }
                 }
